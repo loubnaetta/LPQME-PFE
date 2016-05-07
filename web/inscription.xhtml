@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html   xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+            xmlns:h="http://xmlns.jcp.org/jsf/html"
+            xmlns:f="http://xmlns.jcp.org/jsf/core"    
+            xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="nom-page">
+                Inscription
+            </ui:define>
+            <ui:define name="titre" > &nbsp;  Formulaire d'inscription</ui:define>
+            <ui:define name="body" >
+                
+                                           
+                                
+                                <div class="da-panel-content">
+                                	<form id="da-ex-wizard-form" class="da-form">
+                                            <br/>
+                                    	<fieldset class="da-form-inline">
+                                            
+                                            <legend style="color: orange; font-weight: bold">Information général</legend>
+                                        	<div class="da-form-row">
+                                            	<label>Nom : <span class="required">*</span></label> 
+                                                <div class="da-form-item ">
+                                                	<h:inputText class="required" />
+                                                </div>
+                                            </div>
+                                          <div class="da-form-row">
+                                                  <label>Prénom : <span class="required">*</span></label>
+                                                <div class="da-form-item ">
+                                                	<h:inputText class="required" />
+                                                </div>
+                                            </div>
+                                                
+                                                <div class="da-form-row">
+                                            	<label>Profession <span class="required">*</span></label>
+                                                <div class="da-form-item ">
+                                               <ul class="da-form-list">
+                                                   <li><h:selectBooleanCheckbox   /> <label>Etudiant</label></li>
+                                                   <li><h:selectBooleanCheckbox   /> <label>Enseignant</label></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="da-form-row">
+                                                  <label>Etablissement<span class="required">*</span></label>
+                                                <div class="da-form-item ">
+                                                    <h:inputText  class="required" />
+                                                      
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    	<fieldset class="da-form-inline">
+                                        	<legend style="color: orange; font-weight: bold">Compte</legend>
+                                            <div class="da-form-row">
+                                            	<label>Adresse Email: <span class="required">*</span></label>
+                                                <div class="da-form-item ">
+                                                    <h:inputText class="required email" />
+                                                </div>
+                                            </div>
+                                
+                                    
+                                        </fieldset>
+                                            
+                                            <h:button class="da-button green" value="S'inscrire" style="margin-left: 500px" onclick=""/>
+                                    </form>
+                                    <br/>
+                                    
+                                </div>
+                            
+           
+                      
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>
+

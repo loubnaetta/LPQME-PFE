@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateQuestionQCMTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_question}" for="question" />
+                    <h:inputText id="question" value="#{questionQCMController.selected.question}" title="#{bundle.CreateQuestionQCMTitle_question}" />
+                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_remarque}" for="remarque" />
+                    <h:inputText id="remarque" value="#{questionQCMController.selected.remarque}" title="#{bundle.CreateQuestionQCMTitle_remarque}" />
+                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_serie}" for="serie" />
+                    <h:selectOneMenu id="serie" value="#{questionQCMController.selected.serie}" title="#{bundle.CreateQuestionQCMTitle_serie}" >
+                        <f:selectItems value="#{serieController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_examen}" for="examen" />
+                    <h:selectOneMenu id="examen" value="#{questionQCMController.selected.examen}" title="#{bundle.CreateQuestionQCMTitle_examen}" >
+                        <f:selectItems value="#{examenController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{questionQCMController.selected.id}" title="#{bundle.CreateQuestionQCMTitle_id}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{questionQCMController.create}" value="#{bundle.CreateQuestionQCMSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{questionQCMController.prepareList}" value="#{bundle.CreateQuestionQCMShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateQuestionQCMIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

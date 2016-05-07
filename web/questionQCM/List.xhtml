@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListQuestionQCMTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListQuestionQCMEmpty}" rendered="#{questionQCMController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{questionQCMController.items.rowCount > 0}">
+                    <h:outputText value="#{questionQCMController.pagination.pageFirstItem + 1}..#{questionQCMController.pagination.pageLastItem + 1}/#{questionQCMController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{questionQCMController.previous}" value="#{bundle.Previous} #{questionQCMController.pagination.pageSize}" rendered="#{questionQCMController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{questionQCMController.next}" value="#{bundle.Next} #{questionQCMController.pagination.pageSize}" rendered="#{questionQCMController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{questionQCMController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionQCMTitle_question}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.question}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionQCMTitle_remarque}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.remarque}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionQCMTitle_serie}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.serie}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionQCMTitle_examen}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.examen}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListQuestionQCMTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{questionQCMController.prepareView}" value="#{bundle.ListQuestionQCMViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{questionQCMController.prepareEdit}" value="#{bundle.ListQuestionQCMEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{questionQCMController.destroy}" value="#{bundle.ListQuestionQCMDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{questionQCMController.prepareCreate}" value="#{bundle.ListQuestionQCMCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListQuestionQCMIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

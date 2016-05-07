@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFichierEtudLabel_note}"/>
+                    <h:outputText value="#{fichierEtudController.selected.note}" title="#{bundle.ViewFichierEtudTitle_note}"/>
+                    <h:outputText value="#{bundle.ViewFichierEtudLabel_chemin}"/>
+                    <h:outputText value="#{fichierEtudController.selected.chemin}" title="#{bundle.ViewFichierEtudTitle_chemin}"/>
+                    <h:outputText value="#{bundle.ViewFichierEtudLabel_etudiant}"/>
+                    <h:outputText value="#{fichierEtudController.selected.etudiant}" title="#{bundle.ViewFichierEtudTitle_etudiant}"/>
+                    <h:outputText value="#{bundle.ViewFichierEtudLabel_examen}"/>
+                    <h:outputText value="#{fichierEtudController.selected.examen}" title="#{bundle.ViewFichierEtudTitle_examen}"/>
+                    <h:outputText value="#{bundle.ViewFichierEtudLabel_id}"/>
+                    <h:outputText value="#{fichierEtudController.selected.id}" title="#{bundle.ViewFichierEtudTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{fichierEtudController.destroyAndView}" value="#{bundle.ViewFichierEtudDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewFichierEtudEditLink}"/>
+                <br />
+                <h:commandLink action="#{fichierEtudController.prepareCreate}" value="#{bundle.ViewFichierEtudCreateLink}" />
+                <br />
+                <h:commandLink action="#{fichierEtudController.prepareList}" value="#{bundle.ViewFichierEtudShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewFichierEtudIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

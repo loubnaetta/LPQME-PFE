@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewQuestionOuverteLabel_question}"/>
+                    <h:outputText value="#{questionOuverteController.selected.question}" title="#{bundle.ViewQuestionOuverteTitle_question}"/>
+                    <h:outputText value="#{bundle.ViewQuestionOuverteLabel_remarque}"/>
+                    <h:outputText value="#{questionOuverteController.selected.remarque}" title="#{bundle.ViewQuestionOuverteTitle_remarque}"/>
+                    <h:outputText value="#{bundle.ViewQuestionOuverteLabel_note}"/>
+                    <h:outputText value="#{questionOuverteController.selected.note}" title="#{bundle.ViewQuestionOuverteTitle_note}"/>
+                    <h:outputText value="#{bundle.ViewQuestionOuverteLabel_examen}"/>
+                    <h:outputText value="#{questionOuverteController.selected.examen}" title="#{bundle.ViewQuestionOuverteTitle_examen}"/>
+                    <h:outputText value="#{bundle.ViewQuestionOuverteLabel_id}"/>
+                    <h:outputText value="#{questionOuverteController.selected.id}" title="#{bundle.ViewQuestionOuverteTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{questionOuverteController.destroyAndView}" value="#{bundle.ViewQuestionOuverteDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewQuestionOuverteEditLink}"/>
+                <br />
+                <h:commandLink action="#{questionOuverteController.prepareCreate}" value="#{bundle.ViewQuestionOuverteCreateLink}" />
+                <br />
+                <h:commandLink action="#{questionOuverteController.prepareList}" value="#{bundle.ViewQuestionOuverteShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewQuestionOuverteIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

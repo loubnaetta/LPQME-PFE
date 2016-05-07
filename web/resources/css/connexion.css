@@ -1,0 +1,90 @@
+* {
+ margin:0;
+ padding:0;
+}
+
+body {
+    background:url('../resources/images/logo-accueil.png') no-repeat center;
+ font-family: Arial, Tahoma, sans-serif;
+ color:#ccc;
+}
+
+#container {
+ width:100%;
+ clear:both;
+ float:none;
+ margin:0 auto;
+ clear:both;
+ float:none;
+ /*padding-top:150px;*/
+ /*padding-left: 400px;*/
+}
+
+
+
+p.main label {
+ float:left;
+ padding:5px;
+ display:inline;
+ margin-left:40px;
+ font-size:13px;
+ color:#444;
+ margin-right:10px;
+ 
+}
+
+#box  {
+ clear:both;
+ float:none;
+margin-left:700px;
+ margin-top: -80px;
+}
+
+p.main INPUT {
+ padding:5px;
+ background:#444;
+ color:#aaa;
+ border:1px solid #111;
+ width:200px;
+ float:left;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+
+input.login {
+
+ width:120px;
+ height:26px;
+ background:url('../resources/images/greenrep.png') 0 0 repeat-x ;
+ color:#fff;
+ border:1px solid #7dbc00;
+ margin-left:635px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+ margin-top:10px;
+}
+.inscription{
+     font-family:serif;
+     font-size: 45px;
+     font-weight: bolder;
+     padding:0;
+     margin-left: 700px;
+     margin-top: 300px
+}
+
+span {
+ font-size:15px;
+ color:#aaa;
+}
+
+.space {
+ padding-top:15px;
+}
+
+span input {
+ margin-left:125px;
+ margin-right:5px;
+ border:1px solid #111;
+ background:#444;
+ color:#fff;
+}

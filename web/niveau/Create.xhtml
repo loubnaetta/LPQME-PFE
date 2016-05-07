@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+      <ui:define name="nom-page">
+            <h:outputText  value="#{personneController.current.matiere.nom.toUpperCase()}"/>
+        </ui:define>
+        <ui:define name="title">
+            <h:outputText value="Création d'un nouveau Niveau"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateNiveauLabel_etudiant}" for="etudiant" />
+                    <h:selectOneMenu id="etudiant" value="#{niveauController.selected.etudiant}" title="#{bundle.CreateNiveauTitle_etudiant}" >
+                        <f:selectItems value="#{personneController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateNiveauLabel_nom}" for="nom" />
+                    <h:inputText id="nom" value="#{niveauController.selected.nom}" title="#{bundle.CreateNiveauTitle_nom}" />
+                    <h:outputLabel value="#{bundle.CreateNiveauLabel_matiere}" for="matiere" />
+                    <h:selectOneMenu id="matiere" value="#{niveauController.selected.matiere}" title="#{bundle.CreateNiveauTitle_matiere}" >
+                        <f:selectItems value="#{matiereController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateNiveauLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{niveauController.selected.id}" title="#{bundle.CreateNiveauTitle_id}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{niveauController.create}" value="#{bundle.CreateNiveauSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{niveauController.prepareList}" value="#{bundle.CreateNiveauShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateNiveauIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+      <navigation-rule>
+        <navigation-case>  
+            <description>Map a URL to the action named " </description>  
+            <from-outcome>index</from-outcome>  
+            <to-view-id>/index.xhtml</to-view-id>  
+        </navigation-case>  
+    </navigation-rule>  
+     
+
+
+              <navigation-rule>
+        <navigation-case>  
+            <description>Map a URL to the action named accueil</description>  
+            <from-outcome>accueil</from-outcome>  
+            <to-view-id>/accueil.xhtml</to-view-id>  
+        </navigation-case>  
+    </navigation-rule>  
+              <navigation-rule>
+        <navigation-case>  
+            <description>Map a URL to the action named INSCRIPTION</description>  
+            <from-outcome>inscription</from-outcome>  
+            <to-view-id>/inscription.xhtml</to-view-id>  
+        </navigation-case>  
+    </navigation-rule> 
+    
+       <navigation-rule> 
+     <navigation-case>
+            <from-action>#{personneController.connexion()}</from-action>
+            <from-outcome>list-niveau</from-outcome>
+            <to-view-id>/niveau/List.xhtml</to-view-id>
+        </navigation-case>
+        </navigation-rule>
+
+</faces-config>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewQuestionQCMTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewQuestionQCMLabel_question}"/>
+                    <h:outputText value="#{questionQCMController.selected.question}" title="#{bundle.ViewQuestionQCMTitle_question}"/>
+                    <h:outputText value="#{bundle.ViewQuestionQCMLabel_remarque}"/>
+                    <h:outputText value="#{questionQCMController.selected.remarque}" title="#{bundle.ViewQuestionQCMTitle_remarque}"/>
+                    <h:outputText value="#{bundle.ViewQuestionQCMLabel_serie}"/>
+                    <h:outputText value="#{questionQCMController.selected.serie}" title="#{bundle.ViewQuestionQCMTitle_serie}"/>
+                    <h:outputText value="#{bundle.ViewQuestionQCMLabel_examen}"/>
+                    <h:outputText value="#{questionQCMController.selected.examen}" title="#{bundle.ViewQuestionQCMTitle_examen}"/>
+                    <h:outputText value="#{bundle.ViewQuestionQCMLabel_id}"/>
+                    <h:outputText value="#{questionQCMController.selected.id}" title="#{bundle.ViewQuestionQCMTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{questionQCMController.destroyAndView}" value="#{bundle.ViewQuestionQCMDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewQuestionQCMEditLink}"/>
+                <br />
+                <h:commandLink action="#{questionQCMController.prepareCreate}" value="#{bundle.ViewQuestionQCMCreateLink}" />
+                <br />
+                <h:commandLink action="#{questionQCMController.prepareList}" value="#{bundle.ViewQuestionQCMShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewQuestionQCMIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

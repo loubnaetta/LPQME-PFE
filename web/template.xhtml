@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+ <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- Viewport metatags -->
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <!-- iOS webapp metatags -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+        <!-- iOS webapp icons -->
+        <link rel="apple-touch-icon" href="touch-icon-iphone.html" />
+        <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.html" />
+        <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-retina.html" />
+
+        <!-- CSS Reset -->
+        <h:outputStylesheet library="css" name="reset.css" />
+        <!--  Fluid Grid System -->
+        <h:outputStylesheet library="css" name="fluid.css" />
+        <!-- Theme Stylesheet -->
+        <h:outputStylesheet library="css" name="dandelion.theme.css" />
+        <!--  Main Stylesheet -->
+         <h:outputStylesheet library="css" name="dandelion.css" />
+        <!-- Demo Stylesheet -->
+        <h:outputStylesheet library="css" name="demo.css" />
+      
+
+        <!-- jQuery JavaScript File -->
+        <h:outputStylesheet library="js" name="jquery-1.7.2.min.js"/>
+
+        <!-- jQuery-UI JavaScript Files -->
+         <h:outputStylesheet library="jui" name="js/jquery-ui-1.8.20.min.js"/>
+          <h:outputStylesheet library="jui" name="js/jquery.ui.timepicker.min.js"/>
+          <h:outputStylesheet library="jui" name="js/jquery.ui.touch-punch.min.js"/>
+        <h:outputStylesheet library="jui" name="css/jquery.ui.all.css"/>
+
+        <!-- Plugin Files -->
+
+        <!-- FileInput Plugin -->
+        <h:outputScript library="js" name="jquery.fileinput.js"/>
+        <!-- Placeholder Plugin -->
+        <h:outputScript library="js" name="jquery.placeholder.js"/>
+        <!-- Mousewheel Plugin -->
+        <h:outputScript library="js" name="jquery.mousewheel.min.js"/>
+        <!-- Scrollbar Plugin -->
+           <h:outputScript library="js" name="jquery.tinyscrollbar.min.js"/>
+        <!-- Tooltips Plugin -->
+           <h:outputScript library="plugins" name="tipsy/jquery.tipsy-min.js"/>
+        <h:outputStylesheet library="plugins" name="tipsy/tipsy.css"/>
+
+        <!-- Demo JavaScript Files -->
+        <script type="text/javascript" src="resources/js/demo/demo.dashboard.js"></script>
+        <h:outputScript library="js" name="demo/demo.dashboard.js"/>
+
+        <!-- Core JavaScript Files -->
+         <h:outputScript library="js" name="core/dandelion.core.js"/>
+
+<title>Accueil</title>
+
+</h:head>
+
+    <h:body >
+        
+	<!-- Dandelion Customizer (remove if not needed) -->
+    
+	<!-- Main Wrapper. Set this to 'fixed' for fixed layout and 'fluid' for fluid layout' -->
+	<div id="da-wrapper" class="fluid">
+    
+        <!-- Header -->
+        <div id="da-header" style="background-color: #a9ca60">
+        
+            <div id="da-header-top"   >
+                
+                <!-- Container -->
+                <div class="da-container clearfix" >
+                    
+                    <!-- Logo Container. All images put here will be vertically centere -->
+                    <div id="da-logo-wrap">
+                        <div id="da-logo">
+                            <div id="da-logo-img">
+                                <h:link outcome="index">
+                                    <h:graphicImage library="images" name="logo.png" alt="Dandelion Admin" />
+                                    </h:link>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Header Toolbar Menu -->
+                    <div id="da-header-toolbar" class="clearfix">
+                        <div id="da-user-profile">
+                            <div id="da-user-avatar" style="color: rgb(248,148,40) ;font-size: 18px;font-weight: bold">
+                            <!--  changer l'icon selon le type d'utilisateur admin/prof/student -->
+                            <h:graphicImage library="images" name="admin.png" alt="" title="profil" />
+                              Administrateur    
+                            </div>
+                        
+                       <!-- changer le nom selon le type d'utilisateur administrateur/Enseignant/Etudiant-->
+                              
+                         
+                          
+                        </div>
+                        <div id="da-header-button-container">
+                        	<ul>
+                            	<li class="da-header-button logout">
+                                    <h:link outcome="index" title="déconnexion" />
+                                	
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                                    
+                </div>
+            </div>
+            
+            <div id="da-header-bottom">
+                <!-- Container -->
+                <div class="da-container clearfix" >
+                
+                	
+                	
+                    <!-- Breadcrumbs -->
+                    <div id="da-breadcrumb">
+                        <ul>
+                            <li ><span><h:graphicImage library="images" name="icons/black/16/home.png" alt="Home" />Accueil</span></li>
+  <!--       //         IMPORTANT                                   //       -->  
+   <!--pour afficher en haut le chemin de la page, pr chaque page il faut mentionner la position actuelle -->
+                            <li class="active"><span> <ui:insert name="nom-page" > </ui:insert></span></li>
+        
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+        <!-- Content -->
+        <div id="da-content"  >
+         
+         
+            <!-- Container -->
+            <div class="da-container clearfix">
+            
+	            <!-- Sidebar Separator do not remove -->
+                    <div id="da-sidebar-separator"  >
+                     
+                    </div>
+                
+                <!-- Sidebar -->
+                <div id="da-sidebar" >
+                
+                    <!-- Main Navigation -->
+                    <div id="da-main-nav" class="da-button-container">
+                        <ul>
+                            <li class="active">
+                            	<a href="template.xhtml">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                            <h:graphicImage library="images" name="icons/black/32/home.png" alt="Dashboard" />
+                                    </span>
+                                	Accueil
+                                </a>
+                            </li>
+                            <li>
+                                <h:link >
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<h:graphicImage library="images" name="icons/black/32/create_write.png" alt="Form" />
+                                    </span>
+                                	Nouveau
+                                </h:link>
+
+                            </li>
+                           
+                            <li >
+                                <h:link>
+                                	<span class="da-nav-icon">
+                                    	 <h:graphicImage library="images" name="icons/black/32/file_cabinet.png" alt="File Handling" />
+                                    </span>
+                                      Mes matières
+                                </h:link>
+                            
+                                <ul class="" style="display: block;"  >
+                                    <ui:repeat value="#{matiereController.all()}" var="matiere" >
+                                        <li><h:link value="#{matiere.nom}" /></li>
+                                       </ui:repeat> 
+                                   </ul>
+                            </li>
+               
+                 
+
+                            <li>
+                                <h:link>
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<h:graphicImage library="images" name="icons/black/32/word_documents_1.png" alt="Layout and Typography" />
+                                    </span>
+                                   Mes Documents
+                           
+                                   </h:link>
+                            </li>
+
+                            <li>
+                            	<a href="widgets.html">
+                                	<!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                    	<h:graphicImage library="images" name="icons/black/32/cog_4.png" alt="Widgets" />
+                                    </span>
+                                    Widgets
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <!-- Main Content Wrapper -->
+                <div id="da-content-wrap" class="clearfix">
+             
+         
+                	<!-- Content Area -->
+                      
+                	<div >
+                           
+                              <div class="grid_4" style="width: auto ">
+                                 
+                                  <div class="da-panel" >
+                            	<div class="da-panel-header" >
+                                    <span class="da-panel-title" style=" font-weight: bolder; font-size: 20px">
+                                            <h:graphicImage library="images" name="icons/color/wand.png"/>
+                                        &nbsp;
+                                            <ui:insert name="title" />
+                                    </span>
+                                    </div>
+                             
+                                     <ui:insert name="body" id="da-content-area" >
+                                  
+                            </ui:insert>
+                                       
+                                     </div>
+                                    
+                                   </div>
+                           
+                                </div>
+                         
+                             </div>
+                           
+                    </div>
+                    
+                </div>
+                
+
+
+        
+        <!-- Footer -->
+        <div id="da-footer">
+        	<div class="da-container clearfix">
+                    
+                    <p>Copyright 2016. All Rights Reserved.</p>
+            </div>
+        </div>
+        
+    </div>
+    
+</h:body>
+
+</html>
+

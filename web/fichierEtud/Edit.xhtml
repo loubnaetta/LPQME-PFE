@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+ 
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditFichierEtudLabel_note}" for="note" />
+                    <h:inputText id="note" value="#{fichierEtudController.selected.note}" title="#{bundle.EditFichierEtudTitle_note}" />
+                    <h:outputLabel value="#{bundle.EditFichierEtudLabel_chemin}" for="chemin" />
+                    <h:inputText id="chemin" value="#{fichierEtudController.selected.chemin}" title="#{bundle.EditFichierEtudTitle_chemin}" />
+                    <h:outputLabel value="#{bundle.EditFichierEtudLabel_etudiant}" for="etudiant" />
+                    <h:selectOneMenu id="etudiant" value="#{fichierEtudController.selected.etudiant}" title="#{bundle.EditFichierEtudTitle_etudiant}" >
+                        <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditFichierEtudLabel_examen}" for="examen" />
+                    <h:selectOneMenu id="examen" value="#{fichierEtudController.selected.examen}" title="#{bundle.EditFichierEtudTitle_examen}" >
+                        <f:selectItems value="#{examenController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditFichierEtudLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{fichierEtudController.selected.id}" title="#{bundle.EditFichierEtudTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{fichierEtudController.update}" value="#{bundle.EditFichierEtudSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditFichierEtudViewLink}"/>
+                <br />
+                <h:commandLink action="#{fichierEtudController.prepareList}" value="#{bundle.EditFichierEtudShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditFichierEtudIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

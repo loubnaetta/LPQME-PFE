@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSerieTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSerieEmpty}" rendered="#{serieController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{serieController.items.rowCount > 0}">
+                    <h:outputText value="#{serieController.pagination.pageFirstItem + 1}..#{serieController.pagination.pageLastItem + 1}/#{serieController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{serieController.previous}" value="#{bundle.Previous} #{serieController.pagination.pageSize}" rendered="#{serieController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{serieController.next}" value="#{bundle.Next} #{serieController.pagination.pageSize}" rendered="#{serieController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{serieController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSerieTitle_niveau}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.niveau}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSerieTitle_personne}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.personne}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSerieTitle_questionQCMs}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.questionQCMs}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSerieTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{serieController.prepareView}" value="#{bundle.ListSerieViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{serieController.prepareEdit}" value="#{bundle.ListSerieEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{serieController.destroy}" value="#{bundle.ListSerieDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{serieController.prepareCreate}" value="#{bundle.ListSerieCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListSerieIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

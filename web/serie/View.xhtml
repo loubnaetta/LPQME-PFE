@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSerieTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSerieLabel_niveau}"/>
+                    <h:outputText value="#{serieController.selected.niveau}" title="#{bundle.ViewSerieTitle_niveau}"/>
+                    <h:outputText value="#{bundle.ViewSerieLabel_personne}"/>
+                    <h:outputText value="#{serieController.selected.personne}" title="#{bundle.ViewSerieTitle_personne}"/>
+                    <h:outputText value="#{bundle.ViewSerieLabel_questionQCMs}"/>
+                    <h:outputText value="#{serieController.selected.questionQCMs}" title="#{bundle.ViewSerieTitle_questionQCMs}"/>
+                    <h:outputText value="#{bundle.ViewSerieLabel_id}"/>
+                    <h:outputText value="#{serieController.selected.id}" title="#{bundle.ViewSerieTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{serieController.destroyAndView}" value="#{bundle.ViewSerieDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewSerieEditLink}"/>
+                <br />
+                <h:commandLink action="#{serieController.prepareCreate}" value="#{bundle.ViewSerieCreateLink}" />
+                <br />
+                <h:commandLink action="#{serieController.prepareList}" value="#{bundle.ViewSerieShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewSerieIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
