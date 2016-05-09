@@ -22,8 +22,16 @@ public class FichierProfController implements Serializable {
     private FichierProf current;
     @EJB
     private service.FichierProfFacade ejbFacade;
-  
 
+    public FichierProf getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(FichierProf current) {
+        this.current = current;
+    }
+  
+    
     public FichierProfController() {
     }
 
@@ -52,10 +60,17 @@ public class FichierProfController implements Serializable {
         return "Create";
     }
 
+    public String Create(FichierProf fp){
+        System.out.println("create FP");
+        current=fp;
+        System.out.println(" chemin : "+current.getChemin());
+        return create();
+    }
+    
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FichierProfCreated"));
+            JsfUtil.addSuccessMessage("fichier crée");
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

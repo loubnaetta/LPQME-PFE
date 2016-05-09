@@ -35,5 +35,11 @@ public class NiveauFacade extends AbstractFacade<Niveau> {
         List<Niveau> list=(List<Niveau>)q.getResultList();
         return list;
     }
-    
+
+    public boolean findByNom(String nom) {
+        Query q=em.createQuery("select n from Niveau n where n.nom='"+nom+"'");
+      if(!q.getResultList().isEmpty())
+          return true;
+        return false;
+    }
 }

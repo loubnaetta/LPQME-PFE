@@ -33,9 +33,14 @@ public class PersonneFacade extends AbstractFacade<Personne> {
     
     public Personne connexion(String email,String pwd) throws SQLException{
         Query q=em.createQuery("select p from Personne p where p.email='"+email+"' and p.pwd='"+pwd+"'");
+        if(q.getResultList()!=null){
         Personne p=(Personne) q.getResultList().get(0);
+        if(p!=null)
         return p;
-        
+        else return null;
+        }
+        else
+            return null;
     }
     
 }

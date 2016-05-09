@@ -65,5 +65,5 @@
             <to-view-id>/niveau/List.xhtml</to-view-id>
         </navigation-case>
         </navigation-rule>
-
+      
 </faces-config>

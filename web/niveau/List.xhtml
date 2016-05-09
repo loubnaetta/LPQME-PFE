@@ -25,7 +25,7 @@
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
-                    <p:dataTable var="niveau" value="#{niveauController.all(personneController.current.matiere)}" paginator="true" rows="10" paginatorPosition="top"
+                    <p:dataTable var="niveau" value="#{niveauController.all(personneController.current.matiere)}" 
                     paginatorTemplate="{RowsPerPageDropdown}  {PreviousPageLink} {CurrentPageReport} {NextPageLink} " liveResize="true"
                     rowsPerPageTemplate="5,10,25"    id="data"  resizableColumns="true" emptyMessage="aucun résultat" rowKey="#{niveau.id}">
         <p:column headerText="Nom" >

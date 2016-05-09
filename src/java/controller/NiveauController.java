@@ -3,7 +3,6 @@ package controller;
 import bean.FichierProf;
 import bean.Matiere;
 import bean.Niveau;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import controller.util.JsfUtil;
 import service.NiveauFacade;
 
@@ -20,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
+import org.primefaces.model.UploadedFile;
 
 @Named("niveauController")
 @SessionScoped
@@ -28,10 +28,23 @@ public class NiveauController implements Serializable {
     private Niveau current;
     @EJB
     private service.NiveauFacade ejbFacade;
-
-    /**************/
+    private FichierProfController fichierProfController =new  FichierProfController();
+    
+/****************/
+    private UploadedFile  fichier_cours;
+    public UploadedFile  getFichier_cours() {
+     
+        return fichier_cours;
+    }
+    
+    public void setFichier_cours(UploadedFile  fichier_cours) {
+        this.fichier_cours=fichier_cours;
+    }
+    
+    
       public List<Niveau> all(Matiere matiere){
        List<Niveau> list=ejbFacade.all(matiere.getId());
+ 
        return list;
    }   
       public List<FichierProf> documentation(Niveau niveau){
@@ -85,6 +98,9 @@ public class NiveauController implements Serializable {
     }
     
     public NiveauController() {
+ 
+    
+
     }
 
     public Niveau getSelected() {
@@ -115,11 +131,42 @@ public class NiveauController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public String create(Matiere matiere) {
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NiveauCreated"));
-            return prepareCreate();
+            
+            if( ejbFacade.findByNom(current.getNom())==false && !current.getNom().equals("")){
+           
+               current.setMatiere(matiere);
+                 System.out.println("1.2");
+              getFacade().create(current);
+            JsfUtil.addSuccessMessage("L'opération est s'effectuée avec succès");
+           // JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NiveauCreated"));
+            if(fichier_cours.getSize()!=0){
+                System.out.println("2");
+                FichierProf fichierProf=new FichierProf();
+                System.out.println("3");
+                fichierProf.setType("cours");
+                System.out.println("4");
+                fichierProf.setChemin(fichier_cours.getFileName());
+                System.out.println("5");
+                fichierProf.setProfesseur(current.getMatiere().getProfesseur());
+                System.out.println("6");
+                fichierProf.setNiveau(current);
+                System.out.println("7");
+                fichierProfController.Create(fichierProf);
+                System.out.println("8");
+               current.getFichiers_Prof().add(fichierProf);
+
+                System.out.println("9");
+           
+                 update();
+            }
+              return prepareList();
+            }
+            else{
+                JsfUtil.addErrorMessage("le nom de niveau déja existe");
+                return prepareCreate();
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

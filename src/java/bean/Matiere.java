@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,8 +27,8 @@ public class Matiere implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
-    @OneToMany
-    private List<Personne> professeurs=new ArrayList<>();
+    @OneToOne
+    private Personne professeur;
     @OneToMany
     private List<Niveau> niveaux=new ArrayList<>();
 
@@ -40,12 +41,12 @@ public class Matiere implements Serializable {
         this.nom = nom;
     }
 
-    public List<Personne> getProfesseurs() {
-        return professeurs;
+    public Personne getProfesseur() {
+        return professeur;
     }
 
-    public void setProfesseurs(List<Personne> professeurs) {
-        this.professeurs = professeurs;
+    public void setProfesseur(Personne professeur) {
+        this.professeur = professeur;
     }
 
     public List<Niveau> getNiveaux() {

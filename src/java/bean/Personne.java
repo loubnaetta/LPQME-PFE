@@ -9,13 +9,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.bean.ManagedProperty;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -42,8 +43,8 @@ public class Personne implements Serializable  {
     @OneToMany
     private List<FichierEtud> fichiersEtuds=new ArrayList<>();
    /****    attribut pour Professeur  **/
-      @ManyToOne
-    private Matiere matiere;
+    @OneToOne
+    private Matiere matiere=new Matiere();
     @OneToMany
     private List<FichierProf> fichiersProfs=new ArrayList<>();
      @OneToMany
