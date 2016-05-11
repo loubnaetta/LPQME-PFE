@@ -5,7 +5,7 @@
  */
 package service;
 
-import bean.Serie;
+import bean.Test;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Omaima
  */
 @Stateless
-public class SerieFacade extends AbstractFacade<Serie> {
+public class TestFacade extends AbstractFacade<Test> {
 
     @PersistenceContext(unitName = "Web-PedagogiquePU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class SerieFacade extends AbstractFacade<Serie> {
         return em;
     }
 
-    public SerieFacade() {
-        super(Serie.class);
+    public TestFacade() {
+        super(Test.class);
     }
     
 }

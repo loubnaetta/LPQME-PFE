@@ -1,12 +1,15 @@
 package controller;
 
-import bean.FichierProf;
+import bean.Test;
+import bean.Cours;
+import bean.FichierEleve;
 import bean.Matiere;
 import bean.Niveau;
 import controller.util.JsfUtil;
 import service.NiveauFacade;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,10 +31,13 @@ public class NiveauController implements Serializable {
     private Niveau current;
     @EJB
     private service.NiveauFacade ejbFacade;
-    private FichierProfController fichierProfController =new  FichierProfController();
-    
+    private CoursController coursController =new  CoursController();
+    private MatiereController matiereController= new MatiereController() ;
 /****************/
+    
+    
     private UploadedFile  fichier_cours;
+  
     public UploadedFile  getFichier_cours() {
      
         return fichier_cours;
@@ -47,21 +53,68 @@ public class NiveauController implements Serializable {
  
        return list;
    }   
-      public List<FichierProf> documentation(Niveau niveau){
-          List<FichierProf> doc=new ArrayList<>();
-          for(FichierProf fichier:niveau.getFichiers_Prof()){
-          if(fichier.getType().equals("cours"))
-              doc.add(fichier);
+     
+      public String Ajouter_cours() {
+          if(fichier_cours.getSize()!=0){
+                Cours cours= new Cours();
+                cours.setChemin(fichier_cours.getFileName());
+               
+                cours.setNiveau(current);
+                coursController.Create(cours);
+               current.getCours().add(cours);
+              
+                 update();
+                 
+                 return "";
                   }
-          return doc;
+      else
+         return "";
+             
+      }
+      public List<Cours> cours(Niveau niveau){
+           return niveau.getCours();
+      }
+      public String cours_disponible(Niveau niveau){
+
+          if(niveau.getCours().isEmpty())
+              return "non disponible";
+          else
+              return ""+niveau.getCours().size();
+      }
+      public List<Test> serie(Niveau niveau){
+            List<Test> serie=new ArrayList<>();
+          for(Test s:niveau.getTests()){
+              if(s.getType().equals("serie"))
+              serie.add(s);
+                  }
+          return serie;
+      }
+      public String serie_disponible(Niveau niveau){
+            List<Test> serie=new ArrayList<>();
+          for(Test s:niveau.getTests()){
+              if(s.getType().equals("serie"))
+              serie.add(s);
+                  }
+          if(serie.isEmpty())
+              return "non disponible";
+          else
+              return ""+serie.size();
       }
       
+      public Test examen(Niveau niveau){
+          for(Test t:niveau.getTests()){
+              if(t.getType().equals("examen"))
+                  return t;
+          }
+              
+          return null;
+      }
       public String prochain_examen(Niveau niveau){
           
-          System.out.println("  --"+niveau.getExamens().size());
-          if(niveau.getExamens().size()>0){
-              System.out.println(" A");
-              Date d=niveau.getExamens().get(niveau.getExamens().size()-1).getDate();
+        
+          if(examen(niveau)!=null){
+              
+              Date d=niveau.getTests().get(niveau.getTests().size()-1).getDate_examen();
               
               if(d.after(new Date())){
                   System.out.println(" date exam "+d.toString());
@@ -77,8 +130,15 @@ public class NiveauController implements Serializable {
 
       }
 
- 
 
+    
+   public List<Test> examen_niveau(){
+       return ejbFacade.examen_niveau(current);
+   }
+   
+   public List<Cours> correction_niveau(){
+       return ejbFacade.correction_niveau(current);
+   }
     /**************/
       
    public Niveau getCurrent() {
@@ -135,30 +195,18 @@ public class NiveauController implements Serializable {
         try {
             
             if( ejbFacade.findByNom(current.getNom())==false && !current.getNom().equals("")){
-           
-               current.setMatiere(matiere);
-                 System.out.println("1.2");
-              getFacade().create(current);
+              
+              current.setMatiere(matiere);
+              getFacade().create(current); 
             JsfUtil.addSuccessMessage("L'opération est s'effectuée avec succès");
-           // JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NiveauCreated"));
+            
             if(fichier_cours.getSize()!=0){
-                System.out.println("2");
-                FichierProf fichierProf=new FichierProf();
-                System.out.println("3");
-                fichierProf.setType("cours");
-                System.out.println("4");
-                fichierProf.setChemin(fichier_cours.getFileName());
-                System.out.println("5");
-                fichierProf.setProfesseur(current.getMatiere().getProfesseur());
-                System.out.println("6");
-                fichierProf.setNiveau(current);
-                System.out.println("7");
-                fichierProfController.Create(fichierProf);
-                System.out.println("8");
-               current.getFichiers_Prof().add(fichierProf);
-
-                System.out.println("9");
-           
+                Cours cours=new Cours();
+                cours.setChemin(fichier_cours.getFileName());
+              
+                cours.setNiveau(current);
+                coursController.Create(cours);
+               current.getCours().add(cours);
                  update();
             }
               return prepareList();
@@ -168,7 +216,7 @@ public class NiveauController implements Serializable {
                 return prepareCreate();
             }
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage("erreur de création de niveau");
             return null;
         }
     }
@@ -181,10 +229,8 @@ public class NiveauController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NiveauUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -198,8 +244,22 @@ public class NiveauController implements Serializable {
 
     private void performDestroy() {
         try {
+            if(current.getEleves().isEmpty()){
+                
+            for(Cours c:current.getCours()){
+                current.getCours().remove(c);
+                coursController.destroy(c);
+            }
+            
+            for(Test t:current.getTests()){
+                
+                for(FichierEleve fe:t.getFichiers_Eleves()){
+                    
+                }
+            }
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("NiveauDeleted"));
+            }
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }

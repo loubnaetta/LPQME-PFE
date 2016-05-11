@@ -1,4 +1,4 @@
-/*
+  /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -27,7 +27,7 @@ public class Personne implements Serializable  {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
      private String nom;
     private String prenom;
@@ -37,21 +37,23 @@ public class Personne implements Serializable  {
     private Date derniere_connexion=new Date();
     private boolean etat=false;
     private String role;
-    /****    attribut pour l'etudiant  **/
+    /****    attribut pour l'eleve  **/
     @ManyToMany
     private List<Niveau> niveaux=new ArrayList<>();
     @OneToMany
-    private List<FichierEtud> fichiersEtuds=new ArrayList<>();
+    private List<FichierEleve> fichiersEleves=new ArrayList<>();
    /****    attribut pour Professeur  **/
-    @OneToOne
-    private Matiere matiere=new Matiere();
-    @OneToMany
-    private List<FichierProf> fichiersProfs=new ArrayList<>();
-     @OneToMany
-    private List<Serie> series=new ArrayList<>();
-      @OneToMany
-     private List<Examen> examens=new ArrayList<>();
+   private Matiere matiere;
 
+    public Matiere getMatiere() {
+        return matiere;
+    }
+
+    public void setMatiere(Matiere matiere) {
+        this.matiere = matiere;
+    }
+    
+    
     public boolean isEtat() {
         return etat;
     }
@@ -68,15 +70,7 @@ public class Personne implements Serializable  {
         this.niveaux = niveaux;
     }
 
-    public List<Examen> getExamens() {
-        return examens;
-    }
-
-    public void setExamens(List<Examen> examens) {
-        this.examens = examens;
-    }
-
-      
+  
       
     public String getRole() {
         return role;
@@ -86,37 +80,15 @@ public class Personne implements Serializable  {
         this.role = role;
     }
 
-    public List<FichierEtud> getFichiersEtuds() {
-        return fichiersEtuds;
+    public List<FichierEleve> getFichiersEleves() {
+        return fichiersEleves;
     }
 
-    public void setFichiersEtuds(List<FichierEtud> fichiersEtuds) {
-        this.fichiersEtuds = fichiersEtuds;
+    public void setFichiersEleves(List<FichierEleve> fichiersEleves) {
+        this.fichiersEleves = fichiersEleves;
     }
 
-    public Matiere getMatiere() {
-        return matiere;
-    }
-
-    public void setMatiere(Matiere matiere) {
-        this.matiere = matiere;
-    }
-
-    public List<FichierProf> getFichiersProfs() {
-        return fichiersProfs;
-    }
-
-    public void setFichiersProfs(List<FichierProf> fichiersProfs) {
-        this.fichiersProfs = fichiersProfs;
-    }
-
-    public List<Serie> getSeries() {
-        return series;
-    }
-
-    public void setSeries(List<Serie> series) {
-        this.series = series;
-    }
+  
 /***************/
     
     

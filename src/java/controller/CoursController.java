@@ -1,10 +1,13 @@
 package controller;
 
-import bean.FichierProf;
+import bean.Cours;
+import bean.Niveau;
+import bean.Personne;
 import controller.util.JsfUtil;
-import service.FichierProfFacade;
+import service.CoursFacade;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -15,34 +18,37 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
 
-@Named("fichierProfController")
+@Named("coursController")
 @SessionScoped
-public class FichierProfController implements Serializable {
+public class CoursController implements Serializable {
 
-    private FichierProf current;
+    private Cours current;
     @EJB
-    private service.FichierProfFacade ejbFacade;
+    private service.CoursFacade ejbFacade;
+    
+    private NiveauController niveauController;
+  
 
-    public FichierProf getCurrent() {
+    public Cours getCurrent() {
         return current;
     }
 
-    public void setCurrent(FichierProf current) {
+    public void setCurrent(Cours current) {
         this.current = current;
     }
   
     
-    public FichierProfController() {
+    public CoursController() {
     }
 
-    public FichierProf getSelected() {
+    public Cours getSelected() {
         if (current == null) {
-            current = new FichierProf();
+            current = new Cours();
         }
         return current;
     }
 
-    private FichierProfFacade getFacade() {
+    private CoursFacade getFacade() {
         return ejbFacade;
     }
 
@@ -50,35 +56,37 @@ public class FichierProfController implements Serializable {
         return "List";
     }
 
-    public String prepareView(FichierProf fichierProf) {
+    public String prepareView(Cours fichierProf) {
         current = fichierProf;
         return "View";
     }
 
     public String prepareCreate() {
-        current = new FichierProf();
+        current = new Cours();
         return "Create";
     }
 
-    public String Create(FichierProf fp){
+    public void Create(Cours fp){
         System.out.println("create FP");
         current=fp;
         System.out.println(" chemin : "+current.getChemin());
-        return create();
+         create();
     }
     
-    public String create() {
+    public void create() {
         try {
+            System.out.println(" create cours");
             getFacade().create(current);
+            System.out.println(" cours crée");
             JsfUtil.addSuccessMessage("fichier crée");
-            return prepareCreate();
+           
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+          
+          
         }
     }
 
-    public String prepareEdit(FichierProf fichierProf) {
+    public String prepareEdit(Cours fichierProf) {
         current = fichierProf;
         return "Edit";
     }
@@ -94,18 +102,23 @@ public class FichierProfController implements Serializable {
         }
     }
 
-    public String destroy(FichierProf fichierProf) {
-        current = fichierProf;
+    public void destroy(Cours cours) {
+        current = cours;
         performDestroy();
-        return "List";
+        
     }
 
     private void performDestroy() {
         try {
+            System.out.println("1");
+            Niveau niveau=current.getNiveau();
+                System.out.println("2");
+            niveau.getCours().remove(current);
+                System.out.println("3 ");
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FichierProfDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            System.out.println("erreur");
         }
     }
 
@@ -117,11 +130,11 @@ public class FichierProfController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public FichierProf getFichierProf(java.lang.Long id) {
+    public Cours getFichierProf(java.lang.Long id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = FichierProf.class)
+    @FacesConverter(forClass = Cours.class)
     public static class FichierProfControllerConverter implements Converter {
 
         @Override
@@ -129,7 +142,7 @@ public class FichierProfController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            FichierProfController controller = (FichierProfController) facesContext.getApplication().getELResolver().
+            CoursController controller = (CoursController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "fichierProfController");
             return controller.getFichierProf(getKey(value));
         }
@@ -151,11 +164,11 @@ public class FichierProfController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof FichierProf) {
-                FichierProf o = (FichierProf) object;
+            if (object instanceof Cours) {
+                Cours o = (Cours) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FichierProf.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Cours.class.getName());
             }
         }
 

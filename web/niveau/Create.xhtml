@@ -22,25 +22,22 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
              <div class="da-panel-content">
-        test changement
                   <h:form  enctype="multipart/form-data" id="da-ex-wizard-form" class="da-form" style="padding-top: 30px;padding-left: 40px" >
            
-                      <h:panelGrid columns="2" >
+                      <h:panelGrid columns="2"  >
                    
                           <h:outputLabel value="Nom de niveau : " />
                           <h:inputText id="nom" value="#{niveauController.selected.nom}" required="true"  requiredMessage="le nom de niveau est obligatoire"/>
-                         <h:outputLabel value="Ajouter un cours :    " />
-                         <p:fileUpload  value="{niveauController.fichier_cours}" mode="simple"    /> 
+                         
+                          <h:outputLabel value="Ajouter un cours :    " />
+                         <p:fileUpload  value="#{niveauController.fichier_cours}" mode="simple"    /> 
                           
                 </h:panelGrid>
                 <br />
-                <h:commandButton class="da-button green small"  action="#{niveauController.create(personneController.current.matiere)}" value="Valider"  
-                                  />
+                <h:commandButton class="da-button green small"  action="#{niveauController.create(personneController.current.matiere)}"
+                                 value="Valider"    style="margin-left: 400px;margin-top: 10px; height: 30px"   />
                  
-                <br />
-                <br />
-                <h:commandLink action="#{niveauController.prepareList}" value="#{bundle.CreateNiveauShowAllLink}" immediate="true"/>
-                <br />
+               <br />  <br />
               
             </h:form>
               </div>

@@ -5,17 +5,20 @@
  */
 package service;
 
-import bean.QuestionQCM;
+import bean.Cours;
+import bean.Niveau;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
- * @author Omaima
+ * @author loubna
  */
 @Stateless
-public class QuestionQCMFacade extends AbstractFacade<QuestionQCM> {
+public class CoursFacade extends AbstractFacade<Cours> {
 
     @PersistenceContext(unitName = "Web-PedagogiquePU")
     private EntityManager em;
@@ -25,8 +28,8 @@ public class QuestionQCMFacade extends AbstractFacade<QuestionQCM> {
         return em;
     }
 
-    public QuestionQCMFacade() {
-        super(QuestionQCM.class);
+    public CoursFacade() {
+        super(Cours.class);
     }
-    
+     
 }

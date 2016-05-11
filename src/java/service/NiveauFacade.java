@@ -5,6 +5,8 @@
  */
 package service;
 
+import bean.Test;
+import bean.Cours;
 import bean.Niveau;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -41,5 +43,24 @@ public class NiveauFacade extends AbstractFacade<Niveau> {
       if(!q.getResultList().isEmpty())
           return true;
         return false;
+    }
+    
+  
+       public List<Cours> correction_niveau(Niveau niveau){
+        Query q=em.createQuery("select f from FichierProf f where f.niveau.id="+niveau.getId()+" and f.type='correction'");
+        List<Cours> cours=(List<Cours>)q.getResultList();
+        if(cours!=null)
+            return cours;
+        else 
+            return null;
+    }
+       
+    public List<Test> examen_niveau(Niveau niveau){
+        Query q=em.createQuery("select e from Examen e where e.niveau.id="+niveau.getId());
+        List<Test> examen=(List<Test>)q.getResultList();
+        if(examen!=null)
+            return examen;
+        else 
+            return null;
     }
 }

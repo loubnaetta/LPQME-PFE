@@ -5,17 +5,17 @@
  */
 package service;
 
-import bean.FichierEtud;
+import bean.Question;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author loubna
+ * @author Omaima
  */
 @Stateless
-public class FichierEtudFacade extends AbstractFacade<FichierEtud> {
+public class QuestionFacade extends AbstractFacade<Question> {
 
     @PersistenceContext(unitName = "Web-PedagogiquePU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class FichierEtudFacade extends AbstractFacade<FichierEtud> {
         return em;
     }
 
-    public FichierEtudFacade() {
-        super(FichierEtud.class);
+    public QuestionFacade() {
+        super(Question.class);
     }
     
 }

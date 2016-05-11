@@ -6,9 +6,11 @@
 package service;
 
 import bean.Matiere;
+import bean.Personne;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +31,11 @@ public class MatiereFacade extends AbstractFacade<Matiere> {
         super(Matiere.class);
     }
     
+    public Matiere findByProf(Personne prof){
+        Query q= em.createQuery("select m from Matiere m where m.professeur.id="+prof.getId());
+        Matiere m=(Matiere)q.getResultList().get(0);
+        if(m!=null)
+            return  m;
+                    else return null;
+    }
 }

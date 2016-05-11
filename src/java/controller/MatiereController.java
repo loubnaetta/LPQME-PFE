@@ -1,6 +1,8 @@
 package controller;
 
 import bean.Matiere;
+import bean.Niveau;
+import bean.Personne;
 import controller.util.JsfUtil;
 import service.MatiereFacade;
 
@@ -25,10 +27,23 @@ public class MatiereController implements Serializable {
 
     @EJB
     private service.MatiereFacade ejbFacade;
+    private NiveauController niveauController;
 
     /*************/
     public List<Matiere> all()throws SQLException{
         return ejbFacade.findAll();
+    }
+
+    public Matiere getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Matiere current) {
+        this.current = current;
+    }
+    
+    public Matiere findByProf(Personne prof){
+          return  ejbFacade.findByProf(prof);
     }
     
 
@@ -38,6 +53,7 @@ public class MatiereController implements Serializable {
     
 
     public MatiereController() {
+       
     }
 
     public Matiere getSelected() {
@@ -85,10 +101,17 @@ public class MatiereController implements Serializable {
         current = matiere;
         return "Edit";
     }
-
+    /*********/
+    public void update(Matiere matiere){
+        current=matiere;
+        update();
+    }
+       /*********/ 
     public String update() {
         try {
+            System.out.println("update matiere 1");
             getFacade().edit(current);
+            System.out.println("update matiere 2");
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MatiereUpdated"));
             return "View";
         } catch (Exception e) {

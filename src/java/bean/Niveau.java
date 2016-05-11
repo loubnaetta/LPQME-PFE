@@ -25,35 +25,25 @@ public class Niveau implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
     @ManyToOne
     private Matiere matiere;
     @OneToMany
-    private List<FichierProf> fichiers_Prof=new ArrayList<>();
+    private List<Cours> cours=new ArrayList<>();
     @OneToMany
-    private List<Examen> examens =new ArrayList<>();
+    private List<Test> tests =new ArrayList<>();
     @ManyToMany
-    private List<Personne> etudiants=new ArrayList<>();
-   @OneToMany
-   private List<Serie> series=new ArrayList<>();
+    private List<Personne> eleves=new ArrayList<>();
 
-    public List<Serie> getSeries() {
-        return series;
+
+    public List<Personne> getEleves() {
+        return eleves;
     }
 
-    public void setSeries(List<Serie> series) {
-        this.series = series;
-    }
-   
-   
-    public List<Personne> getEtudiants() {
-        return etudiants;
-    }
-
-    public void setEtudiants(List<Personne> etudiants) {
-        this.etudiants = etudiants;
+    public void setEleves(List<Personne> eleves) {
+        this.eleves = eleves;
     }
 
   
@@ -74,20 +64,20 @@ public class Niveau implements Serializable {
         this.matiere = matiere;
     }
 
-    public List<FichierProf> getFichiers_Prof() {
-        return fichiers_Prof;
+    public List<Cours> getCours() {
+        return cours;
     }
 
-    public void setFichiers_Prof(List<FichierProf> fichiers_Prof) {
-        this.fichiers_Prof = fichiers_Prof;
+    public void setCours(List<Cours> cours) {
+        this.cours = cours;
     }
 
-    public List<Examen> getExamens() {
-        return examens;
+    public List<Test> getTests() {
+        return tests;
     }
 
-    public void setExamens(List<Examen> examens) {
-        this.examens = examens;
+    public void setTests(List<Test> tests) {
+        this.tests = tests;
     }
     
 

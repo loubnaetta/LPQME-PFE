@@ -1,8 +1,8 @@
 package controller;
 
-import bean.FichierEtud;
+import bean.FichierEleve;
 import controller.util.JsfUtil;
-import service.FichierEtudFacade;
+import service.FichierEleveFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -15,26 +15,26 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
 
-@Named("fichierEtudController")
+@Named("fichierEleveController")
 @SessionScoped
-public class FichierEtudController implements Serializable {
+public class FichierEleveController implements Serializable {
 
-    private FichierEtud current;
+    private FichierEleve current;
     @EJB
-    private service.FichierEtudFacade ejbFacade;
+    private service.FichierEleveFacade ejbFacade;
   
 
-    public FichierEtudController() {
+    public FichierEleveController() {
     }
 
-    public FichierEtud getSelected() {
+    public FichierEleve getSelected() {
         if (current == null) {
-            current = new FichierEtud();
+            current = new FichierEleve();
         }
         return current;
     }
 
-    private FichierEtudFacade getFacade() {
+    private FichierEleveFacade getFacade() {
         return ejbFacade;
     }
 
@@ -42,13 +42,13 @@ public class FichierEtudController implements Serializable {
         return "List";
     }
 
-    public String prepareView(FichierEtud fichierEtud) {
+    public String prepareView(FichierEleve fichierEtud) {
         current = fichierEtud;
         return "View";
     }
 
     public String prepareCreate() {
-        current = new FichierEtud();
+        current = new FichierEleve();
       
         return "Create";
     }
@@ -64,7 +64,7 @@ public class FichierEtudController implements Serializable {
         }
     }
 
-    public String prepareEdit(FichierEtud fichierEtud) {
+    public String prepareEdit(FichierEleve fichierEtud) {
         current = fichierEtud;
         return "Edit";
     }
@@ -80,7 +80,7 @@ public class FichierEtudController implements Serializable {
         }
     }
 
-    public String destroy(FichierEtud fichierEtud) {
+    public String destroy(FichierEleve fichierEtud) {
         current = fichierEtud;
         performDestroy();
         return "List";
@@ -104,11 +104,11 @@ public class FichierEtudController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public FichierEtud getFichierEtud(java.lang.Long id) {
+    public FichierEleve getFichierEtud(java.lang.Long id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = FichierEtud.class)
+    @FacesConverter(forClass = FichierEleve.class)
     public static class FichierEtudControllerConverter implements Converter {
 
         @Override
@@ -116,7 +116,7 @@ public class FichierEtudController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            FichierEtudController controller = (FichierEtudController) facesContext.getApplication().getELResolver().
+            FichierEleveController controller = (FichierEleveController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "fichierEtudController");
             return controller.getFichierEtud(getKey(value));
         }
@@ -138,11 +138,11 @@ public class FichierEtudController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof FichierEtud) {
-                FichierEtud o = (FichierEtud) object;
+            if (object instanceof FichierEleve) {
+                FichierEleve o = (FichierEleve) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FichierEtud.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + FichierEleve.class.getName());
             }
         }
 

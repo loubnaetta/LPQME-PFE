@@ -17,23 +17,24 @@ import javax.persistence.ManyToOne;
  * @author loubna
  */
 @Entity
-public class FichierEtud implements Serializable {
+public class FichierEleve implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private float note;
     private String chemin;
     @ManyToOne
-    private Personne etudiant;
+    private Personne eleve=new Personne();
     @ManyToOne
-    private Examen examen;
+    private Test examen= new  Test();
 
     public float getNote() {
         return note;
     }
 
+    
     public void setNote(float note) {
         this.note = note;
     }
@@ -46,19 +47,19 @@ public class FichierEtud implements Serializable {
         this.chemin = chemin;
     }
 
-    public Personne getEtudiant() {
-        return etudiant;
+    public Personne getEleve() {
+        return eleve;
     }
 
-    public void setEtudiant(Personne etudiant) {
-        this.etudiant = etudiant;
+    public void setEleve(Personne eleve) {
+        this.eleve = eleve;
     }
 
-    public Examen getExamen() {
+    public Test getExamen() {
         return examen;
     }
 
-    public void setExamen(Examen examen) {
+    public void setExamen(Test examen) {
         this.examen = examen;
     }
     
@@ -81,10 +82,10 @@ public class FichierEtud implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FichierEtud)) {
+        if (!(object instanceof FichierEleve)) {
             return false;
         }
-        FichierEtud other = (FichierEtud) object;
+        FichierEleve other = (FichierEleve) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

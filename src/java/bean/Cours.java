@@ -17,50 +17,32 @@ import javax.persistence.ManyToOne;
  * @author loubna
  */
 @Entity
-public class QuestionOuverte implements Serializable {
+public class Cours implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String question;
-    private String remarque;
-    private float note;
+    private String chemin;
     @ManyToOne
-    private Examen examen;
+    private Niveau niveau;
 
-    public String getQuestion() {
-        return question;
+    public String getChemin() {
+        return chemin;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setChemin(String chemin) {
+        this.chemin = chemin;
     }
 
-    public String getRemarque() {
-        return remarque;
+
+    public Niveau getNiveau() {
+        return niveau;
     }
 
-    public void setRemarque(String remarque) {
-        this.remarque = remarque;
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
     }
-
-    public float getNote() {
-        return note;
-    }
-
-    public void setNote(float note) {
-        this.note = note;
-    }
-
-    public Examen getExamen() {
-        return examen;
-    }
-
-    public void setExamen(Examen examen) {
-        this.examen = examen;
-    }
-    
     
 
     public Long getId() {
@@ -81,10 +63,10 @@ public class QuestionOuverte implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof QuestionOuverte)) {
+        if (!(object instanceof Cours)) {
             return false;
         }
-        QuestionOuverte other = (QuestionOuverte) object;
+        Cours other = (Cours) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -93,7 +75,7 @@ public class QuestionOuverte implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.QuestionOuverte[ id=" + id + " ]";
+        return "bean.FichierProf[ id=" + id + " ]";
     }
     
 }

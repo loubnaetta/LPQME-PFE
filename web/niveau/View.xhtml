@@ -3,30 +3,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="nom-page">
             <h:outputText  value="#{personneController.current.matiere.nom.toUpperCase()}"/>
         </ui:define>
-        <ui:define name="titre">
-            Détail 
+        <ui:define name="title">
+            Détail <h:outputText value="#{niveauController.current.matiere.nom} :#{niveauController.current.nom} " />
         </ui:define>
         <ui:define name="body" >
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2" >
-                    <h:outputText value="#{bundle.ViewNiveauLabel_etudiant}"/>
-                    <h:outputText value="#{niveauController.current.matiere.nom}" />
-                    <h:outputText value="#{bundle.ViewNiveauLabel_nom}"/>
-                    <h:outputText value="#{niveauController.current.nom}"/>
-                    <h:outputText value="#{bundle.ViewNiveauLabel_matiere}"/>
-                   
-                    <h:outputText value="#{bundle.ViewNiveauLabel_id}"/>
-                    <h:outputText value="#{niveauController.selected.id}" title="#{bundle.ViewNiveauTitle_id}"/>
-                </h:panelGrid>
+                <p:dataTable  var="fichier" value="#{niveauController.cours_niveau()}" paginator="true" rows="10" paginatorPosition="top"
+                    paginatorTemplate="{RowsPerPageDropdown}  {PreviousPageLink} {CurrentPageReport} {NextPageLink} " liveResize="true"
+                    rowsPerPageTemplate="5,10,25"    id="data"  resizableColumns="true" emptyMessage="aucun résultat" rowKey="#{fichier.id}">
+        
+           <p:column headerText="Nom" >
+               <h:outputText value="#{fichier.chemin}" />
+        </p:column>
+           
+       </p:dataTable >
                 <br />
                
                 <br />

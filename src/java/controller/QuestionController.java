@@ -1,8 +1,8 @@
 package controller;
 
-import bean.QuestionQCM;
+import bean.Question;
 import controller.util.JsfUtil;
-import service.QuestionQCMFacade;
+import service.QuestionFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -15,26 +15,26 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
 
-@Named("questionQCMController")
+@Named("questionController")
 @SessionScoped
-public class QuestionQCMController implements Serializable {
+public class QuestionController implements Serializable {
 
-    private QuestionQCM current;
+    private Question current;
     @EJB
-    private service.QuestionQCMFacade ejbFacade;
+    private service.QuestionFacade ejbFacade;
 
 
-    public QuestionQCMController() {
+    public QuestionController() {
     }
 
-    public QuestionQCM getSelected() {
+    public Question getSelected() {
         if (current == null) {
-            current = new QuestionQCM();
+            current = new Question();
         }
         return current;
     }
 
-    private QuestionQCMFacade getFacade() {
+    private QuestionFacade getFacade() {
         return ejbFacade;
     }
 
@@ -43,14 +43,14 @@ public class QuestionQCMController implements Serializable {
         return "List";
     }
 
-    public String prepareView(QuestionQCM questionQCM) {
+    public String prepareView(Question questionQCM) {
         current = questionQCM;
        
         return "View";
     }
 
     public String prepareCreate() {
-        current = new QuestionQCM();
+        current = new Question();
       
         return "Create";
     }
@@ -66,7 +66,7 @@ public class QuestionQCMController implements Serializable {
         }
     }
 
-    public String prepareEdit(QuestionQCM questionQCM) {
+    public String prepareEdit(Question questionQCM) {
         current = questionQCM;
    
         return "Edit";
@@ -83,7 +83,7 @@ public class QuestionQCMController implements Serializable {
         }
     }
 
-    public String destroy(QuestionQCM questionQCM) {
+    public String destroy(Question questionQCM) {
         current = questionQCM;
        
         performDestroy();
@@ -109,11 +109,11 @@ public class QuestionQCMController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public QuestionQCM getQuestionQCM(java.lang.Long id) {
+    public Question getQuestionQCM(java.lang.Long id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = QuestionQCM.class)
+    @FacesConverter(forClass = Question.class)
     public static class QuestionQCMControllerConverter implements Converter {
 
         @Override
@@ -121,7 +121,7 @@ public class QuestionQCMController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            QuestionQCMController controller = (QuestionQCMController) facesContext.getApplication().getELResolver().
+            QuestionController controller = (QuestionController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "questionQCMController");
             return controller.getQuestionQCM(getKey(value));
         }
@@ -143,11 +143,11 @@ public class QuestionQCMController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof QuestionQCM) {
-                QuestionQCM o = (QuestionQCM) object;
+            if (object instanceof Question) {
+                Question o = (Question) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + QuestionQCM.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Question.class.getName());
             }
         }
 

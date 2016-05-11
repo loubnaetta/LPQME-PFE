@@ -25,7 +25,7 @@
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
-                    <p:dataTable var="niveau" value="#{niveauController.all(personneController.current.matiere)}" 
+               <p:dataTable var="niveau" value="#{niveauController.all(personneController.current.matiere)}" 
                     paginatorTemplate="{RowsPerPageDropdown}  {PreviousPageLink} {CurrentPageReport} {NextPageLink} " liveResize="true"
                     rowsPerPageTemplate="5,10,25"    id="data"  resizableColumns="true" emptyMessage="aucun résultat" rowKey="#{niveau.id}">
         <p:column headerText="Nom" >
@@ -35,15 +35,13 @@
         </p:column>
         <p:column headerText="Documentation" >
             <center>
-            <h:outputText value="#{niveauController.documentation(niveau).size()}" />&nbsp; &nbsp; 
-           <h:commandLink title="Ajouter un document" action="#{niveauController.prepareView(niveau)}">
-                     <h:graphicImage library="images" name="icons/black/32/create_write.png" />
-                 </h:commandLink> 
+                <h:outputText value="#{niveauController.cours_disponible(niveau)}" />
+        
             </center>
         </p:column>  
        <p:column headerText="Test" >
            <center>
-           <h:outputText value="#{niveau.series.size()}" /> &nbsp; &nbsp; 
+               <h:outputText value="#{niveauController.serie_disponible(niveau)}" /> 
            <h:commandLink title="Ajouter un Test" action="#{niveauController.prepareView(niveau)}">
                      <h:graphicImage library="images" name="icons/black/32/create_write.png" />
                  </h:commandLink> 
@@ -56,24 +54,20 @@
                  </h:commandLink> 
                 </center>
         </p:column>  
-       <p:column headerText="Etudiants" >
+       <p:column headerText="Elèves" >
            <center>
-            <h:outputText value="#{niveau.etudiants.size()}" />
+            <h:outputText value="#{niveau.eleves.size()}" />
             </center>
         </p:column>
            <p:column headerText="Action" > 
                <center>
-                 <h:commandLink title="Détailles" action="#{niveauController.prepareView(niveau)}">
-                     <h:graphicImage library="images" name="icons/color/magnifier.png" />
-                 </h:commandLink> &nbsp; 
-                  <h:commandLink title="Ajouter Test" action="#{niveauController.prepareEdit(niveau)}" >
+                  <h:commandLink title="Modifier" action="#{niveauController.prepareEdit(niveau)}" >
                      <h:graphicImage library="images" name="icons/color/pencil.png" />
                  </h:commandLink>
                  &nbsp;   
-                 <p:commandLink title="Supprimer"  actionListener="#{niveauController.destroy(niveau)}"  update="data,:notif:notification"  >
-                        <p:confirm header="Confirmation" message="voulez-vous vraiment le supprimer  ?" icon="ui-icon-alert" /> 
+               <!--  <h:commandLink title="Supprimer"  actionListener="{niveauController.destroy(niveau)}"    >
                       <p:graphicImage library="images" name="icons/color/cross.png" />
-                 </p:commandLink> 
+                 </h:commandLink> -->
                     
                </center>
         </p:column>

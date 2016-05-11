@@ -22,44 +22,40 @@ import javax.persistence.OneToMany;
  * @author loubna
  */
 @Entity
-public class Examen implements Serializable {
+public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date date;
-    private String type;
-    private int temps;
+    private String nom;
+    private Date date_examen;
+    private String type;// serie , examen
+    private int temps; // durée en minute
     @OneToMany
-    private List<QuestionQCM> questionQCMs=new ArrayList<>();
-     @OneToMany
-    private List<QuestionOuverte> questionOuvertes=new ArrayList<>();
+    private List<Question> questions=new ArrayList<>();
+    
     @OneToMany
-    private List<FichierEtud> fichiers_Etudiant=new ArrayList<>();
+    private List<FichierEleve> fichiers_Eleves=new ArrayList<>();
     @ManyToOne
     private Niveau niveau;
-    @ManyToOne
-    private Personne personne;
 
-    public Personne getPersonne() {
-        return personne;
+    public String getNom() {
+        return nom;
     }
 
-    public void setPersonne(Personne personne) {
-        this.personne = personne;
-    }
-    
-    
-    
-    
-
-    public Date getDate() {
-        return date;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+
+  
+    public Date getDate_examen() {
+        return date_examen;
+    }
+
+    public void setDate_examen(Date date_examen) {
+        this.date_examen = date_examen;
     }
 
     public String getType() {
@@ -78,28 +74,21 @@ public class Examen implements Serializable {
         this.temps = temps;
     }
 
-    public List<QuestionQCM> getQuestionQCMs() {
-        return questionQCMs;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setQuestionQCMs(List<QuestionQCM> questionQCMs) {
-        this.questionQCMs = questionQCMs;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
-    public List<QuestionOuverte> getQuestionOuvertes() {
-        return questionOuvertes;
+
+    public List<FichierEleve> getFichiers_Eleves() {
+        return fichiers_Eleves;
     }
 
-    public void setQuestionOuvertes(List<QuestionOuverte> questionOuvertes) {
-        this.questionOuvertes = questionOuvertes;
-    }
-
-    public List<FichierEtud> getFichiers_Etudiant() {
-        return fichiers_Etudiant;
-    }
-
-    public void setFichiers_Etudiant(List<FichierEtud> fichiers_Etudiant) {
-        this.fichiers_Etudiant = fichiers_Etudiant;
+    public void setFichiers_Eleves(List<FichierEleve> fichiers_Eleves) {
+        this.fichiers_Eleves = fichiers_Eleves;
     }
 
     public Niveau getNiveau() {
@@ -131,10 +120,10 @@ public class Examen implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Examen)) {
+        if (!(object instanceof Test)) {
             return false;
         }
-        Examen other = (Examen) object;
+        Test other = (Test) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

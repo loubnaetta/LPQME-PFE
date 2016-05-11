@@ -22,13 +22,13 @@ public class Reponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String choix ;
     private boolean  etat;
     
     @ManyToOne
-    private QuestionQCM questionQCM;
+    private Question question;
 
     
     public String getChoix() {
@@ -47,12 +47,12 @@ public class Reponse implements Serializable {
         this.etat = etat;
     }
 
-    public QuestionQCM getQuestionQCM() {
-        return questionQCM;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuestionQCM(QuestionQCM questionQCM) {
-        this.questionQCM = questionQCM;
+    public void setQuestion(Question question) {
+        this.question = question;
     }
     
     

@@ -1,8 +1,8 @@
 package controller;
 
-import bean.Examen;
+import bean.Test;
 import controller.util.JsfUtil;
-import service.ExamenFacade;
+import service.TestFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -15,26 +15,26 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.SelectItem;
 
-@Named("examenController")
+@Named("testController")
 @SessionScoped
-public class ExamenController implements Serializable {
+public class TestController implements Serializable {
 
-    private Examen current;
+    private Test current;
     @EJB
-    private service.ExamenFacade ejbFacade;
+    private service.TestFacade ejbFacade;
 
-    public ExamenController() {
+    public TestController() {
     }
 
-    public Examen getSelected() {
+    public Test getSelected() {
         if (current == null) {
-            current = new Examen();
+            current = new Test();
             
         }
         return current;
     }
 
-    private ExamenFacade getFacade() {
+    private TestFacade getFacade() {
         return ejbFacade;
     }
 
@@ -42,14 +42,14 @@ public class ExamenController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Examen examen) {
+    public String prepareView(Test examen) {
         current = examen;
        
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Examen();
+        current = new Test();
         return "Create";
     }
 
@@ -64,7 +64,7 @@ public class ExamenController implements Serializable {
         }
     }
 
-    public String prepareEdit(Examen examen) {
+    public String prepareEdit(Test examen) {
         current = examen;
         
         return "Edit";
@@ -81,7 +81,7 @@ public class ExamenController implements Serializable {
         }
     }
 
-    public String destroy(Examen examen) {
+    public String destroy(Test examen) {
         current = examen;
         performDestroy();
         return "List";
@@ -105,11 +105,11 @@ public class ExamenController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Examen getExamen(java.lang.Long id) {
+    public Test getExamen(java.lang.Long id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Examen.class)
+    @FacesConverter(forClass = Test.class)
     public static class ExamenControllerConverter implements Converter {
 
         @Override
@@ -117,7 +117,7 @@ public class ExamenController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ExamenController controller = (ExamenController) facesContext.getApplication().getELResolver().
+            TestController controller = (TestController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "examenController");
             return controller.getExamen(getKey(value));
         }
@@ -139,11 +139,11 @@ public class ExamenController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Examen) {
-                Examen o = (Examen) object;
+            if (object instanceof Test) {
+                Test o = (Test) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Examen.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Test.class.getName());
             }
         }
 
