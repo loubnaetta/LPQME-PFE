@@ -91,14 +91,14 @@ public class CoursController implements Serializable {
         return "Edit";
     }
 
-    public String update() {
+    public void update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FichierProfUpdated"));
-            return "View";
+            JsfUtil.addSuccessMessage("cours est modifier");
+      
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            
         }
     }
 
@@ -110,11 +110,7 @@ public class CoursController implements Serializable {
 
     private void performDestroy() {
         try {
-            System.out.println("1");
-            Niveau niveau=current.getNiveau();
-                System.out.println("2");
-            niveau.getCours().remove(current);
-                System.out.println("3 ");
+            System.out.println(" cours à detruire : "+current.getChemin());
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("FichierProfDeleted"));
         } catch (Exception e) {

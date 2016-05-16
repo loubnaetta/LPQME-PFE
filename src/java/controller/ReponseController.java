@@ -1,10 +1,13 @@
 package controller;
 
+import bean.Question;
 import bean.Reponse;
 import controller.util.JsfUtil;
 import service.ReponseFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -23,6 +26,18 @@ public class ReponseController implements Serializable {
  
     @EJB
     private service.ReponseFacade ejbFacade;
+    
+  
+    public Reponse getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Reponse current) {
+        this.current = current;
+    }
+
+ 
+    
     
     public ReponseController() {
     }
@@ -51,12 +66,15 @@ public class ReponseController implements Serializable {
     }
 
     public String prepareCreate() {
+     
         current = new Reponse();
+        
         return "Create";
     }
 
     public String create() {
         try {
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReponseCreated"));
             return prepareCreate();

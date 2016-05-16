@@ -32,6 +32,7 @@ public class Test implements Serializable {
     private Date date_examen;
     private String type;// serie , examen
     private int temps; // durée en minute
+    private boolean etat;
     @OneToMany
     private List<Question> questions=new ArrayList<>();
     
@@ -39,6 +40,16 @@ public class Test implements Serializable {
     private List<FichierEleve> fichiers_Eleves=new ArrayList<>();
     @ManyToOne
     private Niveau niveau;
+
+    public boolean isEtat() {
+        return etat;
+    }
+
+    public void setEtat(boolean etat) {
+        this.etat = etat;
+    }
+    
+    
 
     public String getNom() {
         return nom;
@@ -132,7 +143,7 @@ public class Test implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Examen[ id=" + id + " ]";
+        return "bean.Test[ id=" + id + " ]";
     }
     
 }

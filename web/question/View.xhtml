@@ -6,6 +6,11 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
+          <ui:define name="nom-page">
+            <h:outputText  value="#{personneController.current.matiere.nom.toUpperCase()}"/>
+            <span> <h:outputText  value=" #{testController.current.niveau.nom}"/></span>
+            <li class="active"> <span> <h:outputText  value="#{testController.current.nom.toUpperCase(locale)}"/></span></li>   
+        </ui:define>
         <ui:define name="title">
             <h:outputText value="#{bundle.ViewQuestionQCMTitle}"></h:outputText>
         </ui:define>

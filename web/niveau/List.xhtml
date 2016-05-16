@@ -6,8 +6,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-        
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+   
         <ui:define name="nom-page">
             <h:outputText  value="#{personneController.current.matiere.nom.toUpperCase()}"/>
         </ui:define>
@@ -15,16 +16,8 @@
             Niveaux disponible 
         </ui:define>
         <ui:define name="body">
-                       
-           <h:form id="notif">
-                <p:growl id="notification" showDetail="true" sticky="true" /> 
-           </h:form>
             
            <h:form styleClass="jsfcrud_list_form">
-
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
                <p:dataTable var="niveau" value="#{niveauController.all(personneController.current.matiere)}" 
                     paginatorTemplate="{RowsPerPageDropdown}  {PreviousPageLink} {CurrentPageReport} {NextPageLink} " liveResize="true"
                     rowsPerPageTemplate="5,10,25"    id="data"  resizableColumns="true" emptyMessage="aucun résultat" rowKey="#{niveau.id}">
@@ -33,42 +26,45 @@
             <h:outputText value="#{niveau.nom}" />
             </center>
         </p:column>
+        <p:column headerText="Elèves" style="width: 100px">
+           <center>
+            <h:outputText value="#{niveau.eleves.size()}" />
+            </center>
+        </p:column>
         <p:column headerText="Documentation" >
             <center>
                 <h:outputText value="#{niveauController.cours_disponible(niveau)}" />
         
             </center>
         </p:column>  
-       <p:column headerText="Test" >
+       <p:column headerText="Série" >
            <center>
                <h:outputText value="#{niveauController.serie_disponible(niveau)}" /> 
-           <h:commandLink title="Ajouter un Test" action="#{niveauController.prepareView(niveau)}">
-                     <h:graphicImage library="images" name="icons/black/32/create_write.png" />
+               <h:commandLink action="#{niveauController.prepareList_test(niveau,'serie')}"  title="Les Série" >
+                     <h:graphicImage library="images" name="icons/black/32/cog_5.png" />
                  </h:commandLink> 
            </center>
         </p:column> 
                         <p:column headerText="Examen"  ><center>
                  <h:outputText value="#{niveauController.prochain_examen(niveau)}" />&nbsp; &nbsp; 
                   <h:commandLink title="Ajouter un examen" action="#{niveauController.prepareView(niveau)}">
-                     <h:graphicImage library="images" name="icons/black/32/create_write.png" />
+                      <h:graphicImage library="images" name="icons/black/32/cog_5.png" />
+                   <!--  <h:graphicImage library="images" name="icons/black/32/create_write.png" />-->
                  </h:commandLink> 
                 </center>
         </p:column>  
-       <p:column headerText="Elèves" >
-           <center>
-            <h:outputText value="#{niveau.eleves.size()}" />
-            </center>
-        </p:column>
-           <p:column headerText="Action" > 
+
+           <p:column headerText="Action" style="width: 100px"> 
                <center>
                   <h:commandLink title="Modifier" action="#{niveauController.prepareEdit(niveau)}" >
                      <h:graphicImage library="images" name="icons/color/pencil.png" />
                  </h:commandLink>
-                 &nbsp;   
-               <!--  <h:commandLink title="Supprimer"  actionListener="{niveauController.destroy(niveau)}"    >
+                 &nbsp; 
+              
+            <h:commandLink title="Supprimer"  actionListener="#{niveauController.destroy(niveau)}"    >
                       <p:graphicImage library="images" name="icons/color/cross.png" />
-                 </h:commandLink> -->
-                    
+                 </h:commandLink> 
+              
                </center>
         </p:column>
            

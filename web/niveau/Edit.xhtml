@@ -41,7 +41,7 @@
                    <center>
                        <p:dataTable  var="fichier" style="width: 500px" value="#{niveauController.current.cours}" emptyMessage="aucun résultat" rowKey="#{fichier.id}">
                            <p:column headerText="La liste des cours ">
-                               <h:commandLink title="Supprimer"  actionListener="#{coursController.destroy(fichier)}" >
+                               <h:commandLink title="Supprimer"  actionListener="#{niveauController.destroy_cours(fichier)}" >
                              <p:graphicImage library="images" name="icons/color/cross.png" />
                          </h:commandLink> &nbsp;&nbsp;
                          <h:outputText value="#{fichier.chemin}" />
@@ -61,13 +61,13 @@
               <legend style="color: orange; font-weight: bold">Les séries </legend>
                <div class="da-form-row">     
                    <center>
-                       <p:dataTable  var="fichier" style="width: 500px" value="#{niveauController.serie(niveauController.current)}" emptyMessage="aucun résultat" rowKey="#{fichier.id}">
+                       <p:dataTable  var="test" style="width: 500px" value="#{niveauController.serie(niveauController.current)}" emptyMessage="aucun résultat" rowKey="#{test.id}">
 
                            <p:column headerText=" la liste des série ">
-                         <h:commandLink title="Supprimer"  actionListener="#{testController.destroy(fichier)}"  >
+                               <h:commandLink title="Supprimer"  actionListener="#{niveauController.destroy_test(test)}"  >
                              <p:graphicImage library="images" name="icons/color/cross.png" />
                          </h:commandLink> &nbsp;&nbsp;
-                          <h:outputText value="#{fichier.nom}" />
+                          <h:outputText value="#{test.nom}" />
                           </p:column>
                 </p:dataTable ></center>
                           </div>
@@ -80,19 +80,19 @@
               <legend style="color: orange; font-weight: bold">Examen</legend>
                <div class="da-form-row">     
                    <center>
-                       <p:dataTable  var="fichier" style="width: 500px" value="#{niveauController.examen(niveauController.current)}" emptyMessage="aucun résultat" rowKey="#{fichier.id}">
+                       <p:dataTable  var="test" style="width: 500px" value="#{niveauController.examen(niveauController.current)}" emptyMessage="aucun résultat" rowKey="#{test.id}">
 
-                    <p:column headerText="" >
-                        <h:commandLink title="Supprimer"  actionListener="#{testController.destroy(fichier)}"  >
+                  <!--  <p:column headerText="" >
+                        <h:commandLink title="Supprimer"  actionListener="#{niveauController.destroy_test(test)}"  >
                              <p:graphicImage library="images" name="icons/color/cross.png" />
                          </h:commandLink> 
-                     </p:column>
+                     </p:column>-->
                     <p:column headerText="Date" >
-                        <h:outputText value="#{fichier.date_examen}" > <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>
+                        <h:outputText value="#{test.date_examen}" > <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>
                      </p:column>
                     
                       <p:column headerText="Durée" >
-                          <h:outputText value="#{fichier.temps} min" /> 
+                          <h:outputText value="#{test.temps} min" /> 
                      </p:column>
 
                 </p:dataTable ></center>

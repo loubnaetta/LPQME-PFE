@@ -65,5 +65,21 @@
             <to-view-id>/niveau/List.xhtml</to-view-id>
         </navigation-case>
         </navigation-rule>
+        
+       <navigation-rule> 
+     <navigation-case>
+            <from-action>#{testController.prepareCreate(niveau,'serie')}</from-action>
+            <from-outcome>Create</from-outcome>
+            <to-view-id>/test/Create.xhtml</to-view-id>
+        </navigation-case>
+        </navigation-rule>
+        
+       <navigation-rule> 
+     <navigation-case>
+            <from-action>#{testController.create()}</from-action>
+            <from-outcome>Create-question</from-outcome>
+            <to-view-id>/question/Create.xhtml</to-view-id>
+        </navigation-case>
+        </navigation-rule>
       
 </faces-config>

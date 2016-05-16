@@ -5,10 +5,13 @@
  */
 package service;
 
+import bean.Niveau;
 import bean.Test;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,13 @@ public class TestFacade extends AbstractFacade<Test> {
         super(Test.class);
     }
     
+
+    public List<Test> test_niveau(Niveau niveau){
+        Query q=em.createQuery("select t from Test t where t.niveau.id="+niveau.getId());
+        List<Test> lista= (List<Test>)q.getResultList();
+        if(lista!=null)
+            return lista;
+        else return null;
+    }
+
 }

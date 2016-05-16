@@ -1,10 +1,14 @@
 package controller;
 
 import bean.Question;
+import bean.Reponse;
+import bean.Test;
 import controller.util.JsfUtil;
 import service.QuestionFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -20,12 +24,60 @@ import javax.faces.model.SelectItem;
 public class QuestionController implements Serializable {
 
     private Question current;
+    
+    private int nrb_choix;
     @EJB
     private service.QuestionFacade ejbFacade;
+    @EJB
+    private service.TestFacade testFacade;
+     @EJB
+     private service.ReponseFacade reponseFacade;
 
+  
+    private  Reponse reponse=new Reponse();
+    
+   public void ajouter_reponse(){
+       current.getReponses().add(reponse);
+       reponse=new Reponse();
+   }
+   
+   public void supprimer_reponse(Reponse reponse){
+       current.getReponses().remove(reponse);
+   }
+   
+   
+    public String reponse_question(){
+        return "Create_reponse";
+    }
+   
+    public Reponse getReponse() {
+        return reponse;
+    }
 
+    public void setReponse(Reponse reponse) {
+        this.reponse = reponse;
+    }
+   
     public QuestionController() {
     }
+
+    public Question getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Question current) {
+        this.current = current;
+    }
+
+    
+    public int getNrb_choix() {
+        return nrb_choix;
+    }
+
+    public void setNrb_choix(int nrb_choix) {
+        this.nrb_choix = nrb_choix;
+    }
+    
 
     public Question getSelected() {
         if (current == null) {
@@ -51,18 +103,32 @@ public class QuestionController implements Serializable {
 
     public String prepareCreate() {
         current = new Question();
-      
+         
         return "Create";
     }
 
-    public String create() {
+    public String create(Test test) {
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("QuestionQCMCreated"));
-            return prepareCreate();
+             current.setTest(test);
+              for(Reponse rep:current.getReponses()){
+                //rep.setQuestion(current);
+                reponseFacade.create(rep);
+                //current.getReponses().add(rep);
+            }
+           
+             getFacade().create(current);
+             for(Reponse rep:current.getReponses()){
+                rep.setQuestion(current);
+                reponseFacade.edit(rep);
+               
+            }
+             current.getTest().getQuestions().add(current);
+             testFacade.edit(current.getTest());
+
+             return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            return "";
         }
     }
 
@@ -83,18 +149,35 @@ public class QuestionController implements Serializable {
         }
     }
 
-    public String destroy(Question questionQCM) {
-        current = questionQCM;
-       
+    public String destroy(Question question) {
+        current = question;
         performDestroy();
         return "List";
     }
 
-
+      
     private void performDestroy() {
         try {
-            getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("QuestionQCMDeleted"));
+            if(current.getTest()!=null){
+             current.getTest().getQuestions().remove(current);
+             testFacade.edit(current.getTest());
+             current.setTest(null);
+             ejbFacade.edit(current);
+            }
+             List<Reponse> reps=current.getReponses();
+             for(Reponse rep:reps){
+                 current.getReponses().remove(rep);
+                 ejbFacade.edit(current);
+                 rep.setQuestion(null);
+                 reponseFacade.edit(rep);
+                 reponseFacade.remove(rep);
+             }
+             
+             if(current.getReponses().size()==0)
+                 ejbFacade.remove(current);
+             else
+                 performDestroy();
+             
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }

@@ -1,5 +1,6 @@
 package controller;
 
+import bean.Niveau;
 import bean.Test;
 import controller.util.JsfUtil;
 import service.TestFacade;
@@ -22,6 +23,22 @@ public class TestController implements Serializable {
     private Test current;
     @EJB
     private service.TestFacade ejbFacade;
+    @EJB
+    private service.NiveauFacade niveauFacade;
+    
+    private NiveauController  niveauController;
+    
+    /**********************/
+    public String title_create(){
+        if(current.getType().equals("serie"))
+            return "Nouvelle Série";
+        else
+            return "Nouveau Examen";
+    }
+    
+  
+ 
+    /**********************/
 
     public TestController() {
     }
@@ -38,8 +55,12 @@ public class TestController implements Serializable {
         return ejbFacade;
     }
 
-    public String prepareList() {
-        return "List";
+    public String prepareList(Niveau niveau, String type) {
+       
+        if(type.equals("serie"))
+            return "List_serie";
+        else
+           return "List_examen";
     }
 
     public String prepareView(Test examen) {
@@ -48,36 +69,42 @@ public class TestController implements Serializable {
         return "View";
     }
 
-    public String prepareCreate() {
+    public String prepareCreate(Niveau niveau,String type) {
         current = new Test();
+        current.setType(type);
+        current.setNiveau(niveau);
         return "Create";
     }
 
     public String create() {
         try {
+            current.setEtat(true);
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ExamenCreated"));
-            return prepareCreate();
+            current.getNiveau().getTests().add(current);
+            niveauFacade.edit(current.getNiveau());
+            return "/question/List";
+        
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+          return "";
         }
     }
 
     public String prepareEdit(Test examen) {
+       
         current = examen;
         
-        return "Edit";
+        return "/question/List";
     }
 
-    public String update() {
+    public void  update() {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ExamenUpdated"));
-            return "View";
+   
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+            
         }
     }
 
@@ -89,6 +116,7 @@ public class TestController implements Serializable {
 
     private void performDestroy() {
         try {
+            current.setEtat(false);
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ExamenDeleted"));
         } catch (Exception e) {
@@ -96,6 +124,15 @@ public class TestController implements Serializable {
         }
     }
 
+    public Test getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Test current) {
+        this.current = current;
+    }
+     
+    
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

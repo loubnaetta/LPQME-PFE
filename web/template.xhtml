@@ -29,6 +29,7 @@
          <h:outputStylesheet library="css" name="dandelion.css" />
         <!-- Demo Stylesheet -->
         <h:outputStylesheet library="css" name="demo.css" />
+ 
       
 
         <!-- jQuery JavaScript File -->
@@ -39,11 +40,13 @@
           <h:outputStylesheet library="jui" name="js/jquery.ui.timepicker.min.js"/>
           <h:outputStylesheet library="jui" name="js/jquery.ui.touch-punch.min.js"/>
         <h:outputStylesheet library="jui" name="css/jquery.ui.all.css"/>
-
+        <h:outputStylesheet library="jui" name="css/jquery.ui.datepicker.css"/>
+         
         <!-- Plugin Files -->
 
         <!-- FileInput Plugin -->
         <h:outputScript library="js" name="jquery.fileinput.js"/>
+        <h:outputScript library="js" name="demo/demo.ui.js"/>
         <!-- Placeholder Plugin -->
         <h:outputScript library="js" name="jquery.placeholder.js"/>
         <!-- Mousewheel Plugin -->
@@ -96,8 +99,8 @@
                         <div id="da-user-profile">
                             <div id="da-user-avatar" style="color: rgb(248,148,40) ;font-size: 18px;font-weight: bold">
                             <!--  changer l'icon selon le type d'utilisateur admin/prof/student -->
-                            <h:graphicImage library="images" name="admin.png" alt="" title="profil" />
-                              Administrateur    
+                            <h:graphicImage library="images" name="#{personneController.photo_profil()}" alt="" title="profil" />
+                            #{personneController.current.nom}&nbsp;  #{personneController.current.prenom}
                             </div>
                         
                        <!-- changer le nom selon le type d'utilisateur administrateur/Enseignant/Etudiant-->
@@ -221,17 +224,18 @@
                 </div>
                 
                 <!-- Main Content Wrapper -->
-             
+      
                 <div id="da-content-wrap" class="clearfix">
              
          
                 	<!-- Content Area -->
-                     
+
                         <div  >
-                           
-                              <div class="grid_4" style="width: auto ">
+                            
+                              <div class="grid_4" style="width: auto ;">
                                  
                                   <div class="da-panel" >
+                                  
                             	<div class="da-panel-header" >
                                     <span class="da-panel-title" style=" font-weight: bolder; font-size: 20px">
                                             <h:graphicImage library="images" name="icons/color/wand.png"/>
@@ -239,21 +243,21 @@
                                             <ui:insert name="title" />
                                     </span>
                                     </div>
-                             
+                          
                                      <ui:insert name="body" id="da-content-area" >
                                   
                             </ui:insert>
-                                       
+                                         
                                      </div>
                                     
-                                   </div>
+                              </div>
                            
                                 </div>
-                            
+                          
                          
                              </div>
                  
-                           
+                   
                     </div>
                     
                 </div>

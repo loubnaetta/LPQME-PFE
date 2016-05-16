@@ -75,7 +75,7 @@ public class Cours implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.FichierProf[ id=" + id + " ]";
+        return "bean.Cours[ id=" + id + " ]";
     }
     
 }

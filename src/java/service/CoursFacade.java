@@ -32,4 +32,13 @@ public class CoursFacade extends AbstractFacade<Cours> {
         super(Cours.class);
     }
      
+    public List<Cours> cours_niveau(Niveau niveau){
+        Query q=em.createQuery("select c from Cours c where c.niveau.id="+niveau.getId());
+        List<Cours> lista= (List<Cours>)q.getResultList();
+        if(lista!=null)
+            return lista;
+        else return null;
+    }
+    
+
 }

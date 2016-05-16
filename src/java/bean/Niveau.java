@@ -30,12 +30,21 @@ public class Niveau implements Serializable {
     private String nom;
     @ManyToOne
     private Matiere matiere;
+    private boolean etat;
     @OneToMany
     private List<Cours> cours=new ArrayList<>();
     @OneToMany
     private List<Test> tests =new ArrayList<>();
     @ManyToMany
     private List<Personne> eleves=new ArrayList<>();
+
+    public boolean isEtat() {
+        return etat;
+    }
+
+    public void setEtat(boolean etat) {
+        this.etat = etat;
+    }
 
 
     public List<Personne> getEleves() {

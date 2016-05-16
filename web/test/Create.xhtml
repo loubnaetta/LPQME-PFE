@@ -3,45 +3,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <ui:composition template="/template.xhtml">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml" >
+              
+         <ui:define name="nom-page">
+            <h:outputText  value="#{personneController.current.matiere.nom.toUpperCase()}"/>
+            <li class="active"> <span> <h:outputText  value=" #{testController.current.niveau.nom}"/></span></li>
+            <li class="active"> <span> <h:outputText  value="#{testController.title_create()}"/></span></li>
+           
+        </ui:define>
         <ui:define name="title">
-            <h:outputText value="Nouveau Examen"></h:outputText>
+            <h:outputText value="#{testController.title_create()}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateExamenLabel_personne}" for="personne" />
-                    <h:selectOneMenu id="personne" value="#{examenController.selected.personne}" title="#{bundle.CreateExamenTitle_personne}" >
-                        <f:selectItems value="#{personneController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateExamenLabel_date}" for="date" />
-                    <h:inputText id="date" value="#{examenController.selected.date}" title="#{bundle.CreateExamenTitle_date}" />
-                    <h:outputLabel value="#{bundle.CreateExamenLabel_type}" for="type" />
-                    <h:inputText id="type" value="#{examenController.selected.type}" title="#{bundle.CreateExamenTitle_type}" />
-                    <h:outputLabel value="#{bundle.CreateExamenLabel_temps}" for="temps" />
-                    <h:inputText id="temps" value="#{examenController.selected.temps}" title="#{bundle.CreateExamenTitle_temps}" />
-                    <h:outputLabel value="#{bundle.CreateExamenLabel_niveau}" for="niveau" />
-                    <h:selectOneMenu id="niveau" value="#{examenController.selected.niveau}" title="#{bundle.CreateExamenTitle_niveau}" >
-                        <f:selectItems value="#{niveauController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateExamenLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{examenController.selected.id}" title="#{bundle.CreateExamenTitle_id}" />
-                </h:panelGrid>
+         
+            <div class="da-panel-content" style="width: 800px;">
+            <h:form class="da-form">
+
+                                            <div class="da-form-row">
+                                            	<label>Nom : <span class="required">*</span></label> 
+                                                <div class="da-form-item ">
+                                                    <h:inputText value="#{testController.current.nom}" class="required" required="true"  requiredMessage="le nom est obligatoire" />
+                                                </div>
+                                    
+                                            </div>
+                                        
+                                          <div class="da-form-row">
+                                            	<label>Durée : <span >*</span></label> 
+                                                <div class="da-form-item ">
+                                                    <h:inputText value="#{testController.current.temps}"  />
+                                                </div>
+                                    
+                                            </div>
+                                    <div class="da-form-row">
+                                            	<label>Date : <span >*</span></label> 
+                                                <div class="da-form-item " >
+                                                    <h:inputText    value="#{testController.current.date_examen}"  />
+                                                   
+                                                </div>
+                                    
+                                            </div>
+                                  
+               
+                                       
                 <br />
-                <h:commandLink action="#{examenController.create}" value="#{bundle.CreateExamenSaveLink}" />
+                <h:commandButton action="#{testController.prepareList(niveauController.current, 'serie')}"  value="Précédant"
+                               class="da-button blue"      style="margin-left: 100px;width:150px; height: 40px;font-size: 16px;font-weight: bold; " />
+               
+                 <h:commandButton action="#{testController.create()}"  value="Suivant"
+                               class="da-button green"      style="margin-left: 300px;width:150px; height: 40px;font-size: 16px;font-weight: bold; " />
+               
+
                 <br />
                 <br />
-                <h:commandLink action="#{examenController.prepareList}" value="#{bundle.CreateExamenShowAllLink}" immediate="true"/>
                 <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateExamenIndexLink}"/>
+             
             </h:form>
+            </div>
+          
         </ui:define>
+     
     </ui:composition>
 
 </html>

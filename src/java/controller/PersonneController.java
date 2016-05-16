@@ -29,13 +29,21 @@ public class PersonneController implements Serializable {
     private service.PersonneFacade ejbFacade;
 
     /*********/
+    public String photo_profil(){
+        if(current.getRole().equals("professeur"))
+            return "prof.png";
+        else if(current.getRole().equals("eleve"))
+            return "student.png";
+        else
+            return "admin.png";
+    }
+   
     String email="",pwd="";
       public String connexion()throws SQLException{
           
           if(ejbFacade.connexion(email,pwd)!=null){
               current=ejbFacade.connexion(email,pwd);
               if(current.getRole().equals("professeur")){
-                  System.out.println(" je ss prof");
                   return "list-niveau";
               }
               else 

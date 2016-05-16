@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+                <ui:define name="nom-page">
+            <h:outputText  value="#{personneController.current.matiere.nom.toUpperCase()}"/>
+            <li class="active"> <span> <h:outputText  value=" #{testController.current.niveau.nom}"/></span></li>
+            <li class="active"> <span> <h:outputText  value="#{testController.title_create()}"/></span></li>
+           
+        </ui:define>
+        <ui:define name="title">
+            <h:outputText value="Nouvelle Question"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+             <div class="da-panel-content" style="width: 800px; padding-left: 30px;padding-top: 30px">   
+                 
+            <h:form class="da-form">
+         #{questionController.current.question}
+                <div class="da-form-row">
+                        <label>Les choix: <span class="required" >*</span></label> 
+                        <div class="da-form-item "  style="padding-left: 10px; width: 800px">
+                                 <h:inputText value="#{questionController.reponse.choix}"   />
+                                 <br/>
+                            <h:selectOneRadio class="da-form-list inline"  value="#{questionController.reponse.etat}" required="true">
+                                <f:selectItem  itemValue="true" itemLabel="vrai" />
+                                <f:selectItem  itemValue="false" itemLabel="faux" />
+                            </h:selectOneRadio>
+                       
+                        </div>
+                        <h:commandButton class="da-button green small" value="Ajouter " action="#{questionController.ajouter_reponse()}"
+                                         style="margin-left: 400px;margin-top: 10px; height: 30px;width: 100px"/>
+                        <br/>
+                        <br/>
+                </div>
+                         <div class="da-form-row">
+                           
+                        <center>
+                           
+                    <p:dataTable  var="choix" style="width: 700px" value="#{questionController.current.reponses}" emptyMessage="aucun résultat" >
+                           <p:column headerText="La liste des choix ">
+                               <h:outputText value="#{choix.choix}" />
+                         </p:column>
+                           <p:column headerText="Etat" style="width: 50px">
+                               <h:outputText value="#{choix.etat}" />
+                         </p:column>
+                        <p:column style="width: 30px">
+                                  <h:commandLink title="Supprimer"  actionListener="#{questionController.supprimer_reponse(choix)}" >
+                             <p:graphicImage library="images" name="icons/color/cross.png" />
+                         </h:commandLink> &nbsp;&nbsp;
+                         </p:column>
+                      </p:dataTable ></center>
+                           
+                      
+                    </div>
+               
+                <br />
+                 &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                <!--<h:commandButton action="#{questionController.prepareCreate()}"  value="Précédant"
+                               class="da-button blue"      style="width:150px; height: 40px;font-size: 16px;font-weight: bold; " />-->
+                <h:commandButton  action="#{questionController.create(testController.current)}"  value="Valider"
+                               class="da-button green"      style="margin-left: 400px;width:150px; height: 40px;font-size: 16px;font-weight: bold; " />
+                
+                <br />
+                
+               
+            </h:form>
+             </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

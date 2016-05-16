@@ -69,6 +69,9 @@
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
+                 <h:commandLink action="#{testController.prepareCreate(niveau,'serie')}"  title="Ajouter une Série" >
+                     <h:graphicImage library="images" name="icons/black/32/create_write.png" />
+                 </h:commandLink> 
                 <h:commandLink action="#{examenController.prepareCreate}" value="#{bundle.ListExamenCreateLink}"/>
                 <br />
                 <br />

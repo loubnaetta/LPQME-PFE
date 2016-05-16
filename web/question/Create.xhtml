@@ -3,42 +3,54 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
+                <ui:define name="nom-page">
+            <h:outputText  value="#{personneController.current.matiere.nom.toUpperCase()}"/>
+            <li class="active"> <span> <h:outputText  value=" #{testController.current.niveau.nom}"/></span></li>
+            <li class="active"> <span> <h:outputText  value="#{testController.current.nom}"/></span></li>
+           
+        </ui:define>
         <ui:define name="title">
-            <h:outputText value="#{bundle.CreateQuestionQCMTitle}"></h:outputText>
+            <h:outputText value="Nouvelle Question"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_question}" for="question" />
-                    <h:inputText id="question" value="#{questionQCMController.selected.question}" title="#{bundle.CreateQuestionQCMTitle_question}" />
-                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_remarque}" for="remarque" />
-                    <h:inputText id="remarque" value="#{questionQCMController.selected.remarque}" title="#{bundle.CreateQuestionQCMTitle_remarque}" />
-                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_serie}" for="serie" />
-                    <h:selectOneMenu id="serie" value="#{questionQCMController.selected.serie}" title="#{bundle.CreateQuestionQCMTitle_serie}" >
-                        <f:selectItems value="#{serieController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_examen}" for="examen" />
-                    <h:selectOneMenu id="examen" value="#{questionQCMController.selected.examen}" title="#{bundle.CreateQuestionQCMTitle_examen}" >
-                        <f:selectItems value="#{examenController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateQuestionQCMLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{questionQCMController.selected.id}" title="#{bundle.CreateQuestionQCMTitle_id}" />
-                </h:panelGrid>
+             <div class="da-panel-content" style="width: 800px; padding-left: 30px;padding-top: 30px">   
+                 
+            <h:form class="da-form">
+
+                                    <div class="da-form-row">
+                        <label>Question: <span class="required">*</span></label> 
+                        <div class="da-form-item " style="padding-left: 10px;width: 800px">
+                            <h:inputTextarea style="height: 100px" value="#{questionController.selected.question}" class="required" requiredMessage="le nom de niveau est obligatoire" />
+                        </div>
+
+                    </div>
+
+                    <div class="da-form-row">
+                        <label>Indication: <span class="required" >*</span></label> 
+                        <div class="da-form-item "  style="padding-left: 10px; width: 800px">
+                            <h:inputTextarea value="#{questionController.selected.remarque}"    requiredMessage="le nom de niveau est obligatoire"  />
+                            <br/> <label style="color: red">* L'indication sert à aider l'élève lorsqu'il n'arrive pas à avoir une bonne réponse</label>
+
+                        </div>
+                    </div>
+            
                 <br />
-                <h:commandLink action="#{questionQCMController.create}" value="#{bundle.CreateQuestionQCMSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{questionQCMController.prepareList}" value="#{bundle.CreateQuestionQCMShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateQuestionQCMIndexLink}"/>
+                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                <h:commandButton action="#{niveauController.prepareList_test(niveauController.current,'serie')}"  value="Précédant"
+                               class="da-button blue"      style="width:150px; height: 40px;font-size: 16px;font-weight: bold; " />
+                <h:commandButton action="#{questionController.reponse_question()}"  value="Suivant"
+                               class="da-button green"      style="margin-left: 400px;width:150px; height: 40px;font-size: 16px;font-weight: bold; " />
+               
+
+               <br/>
+               <br/>
             </h:form>
+             </div>
         </ui:define>
     </ui:composition>
 
