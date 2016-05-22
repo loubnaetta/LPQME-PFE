@@ -40,23 +40,8 @@
             <to-view-id>/index.xhtml</to-view-id>  
         </navigation-case>  
     </navigation-rule>  
-     
-
-
-              <navigation-rule>
-        <navigation-case>  
-            <description>Map a URL to the action named accueil</description>  
-            <from-outcome>accueil</from-outcome>  
-            <to-view-id>/accueil.xhtml</to-view-id>  
-        </navigation-case>  
-    </navigation-rule>  
-              <navigation-rule>
-        <navigation-case>  
-            <description>Map a URL to the action named INSCRIPTION</description>  
-            <from-outcome>inscription</from-outcome>  
-            <to-view-id>/inscription.xhtml</to-view-id>  
-        </navigation-case>  
-    </navigation-rule> 
+        
+               
     
        <navigation-rule> 
      <navigation-case>

@@ -17,7 +17,7 @@
 
             <div id="box" >
                 <br/><br/><br/><br/><br/>
-                <h:form>
+                <h:form >
                     <p class="main">
                         <br/><br/><br/><br/><br/>
                         <label style=" font-size: 20px; font-weight: bold">E-mail : </label>
@@ -32,7 +32,11 @@
                 </h:form>
             </div>
             <div class="inscription" >
-                <h:link value="S'inscrire" outcome="inscription"/>
+                <h:form class="da-form">
+                    <h:commandButton action="#{personneController.prepareInscription()}"   value="S'inscrire "
+                               class="da-button green"      style="width:250px; height: 50px;font-size: 26px;font-weight: bold; " />
+              <!--  <h:link value="S'inscrire" outcome="inscription"/> -->
+            </h:form>
             </div>
 
         </div>

@@ -45,8 +45,8 @@
                            <p:column headerText="La liste des choix ">
                                <h:outputText value="#{choix.choix}" />
                          </p:column>
-                           <p:column headerText="Etat" style="width: 50px">
-                               <h:outputText value="#{choix.etat}" />
+                           <p:column  style="width: 50px">
+                               <h:outputText value="#{choix.affiche_Etat()}" />
                          </p:column>
                         <p:column style="width: 30px">
                                   <h:commandLink title="Supprimer"  actionListener="#{questionController.supprimer_reponse(choix)}" >
@@ -61,10 +61,12 @@
                 <br />
                  &nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;
-                <!--<h:commandButton action="#{questionController.prepareCreate()}"  value="Précédant"
+                <!--<h:commandButton action="{questionController.prepareCreate()}"  value="Précédant"
                                class="da-button blue"      style="width:150px; height: 40px;font-size: 16px;font-weight: bold; " />-->
                 <h:commandButton  action="#{questionController.create(testController.current)}"  value="Valider"
                                class="da-button green"      style="margin-left: 400px;width:150px; height: 40px;font-size: 16px;font-weight: bold; " />
+                
+                <br />
                 
                 <br />
                 

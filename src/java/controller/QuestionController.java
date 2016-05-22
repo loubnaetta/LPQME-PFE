@@ -36,8 +36,10 @@ public class QuestionController implements Serializable {
   
     private  Reponse reponse=new Reponse();
     
-   public void ajouter_reponse(){
+  public void ajouter_reponse(){
        current.getReponses().add(reponse);
+       for(Reponse rep:current.getReponses())
+           System.out.println("rep "+rep.getChoix());
        reponse=new Reponse();
    }
    
@@ -111,7 +113,7 @@ public class QuestionController implements Serializable {
         try {
              current.setTest(test);
               for(Reponse rep:current.getReponses()){
-                //rep.setQuestion(current);
+               // rep.setQuestion(current);
                 reponseFacade.create(rep);
                 //current.getReponses().add(rep);
             }
@@ -132,6 +134,7 @@ public class QuestionController implements Serializable {
         }
     }
 
+    
     public String prepareEdit(Question questionQCM) {
         current = questionQCM;
    
@@ -140,9 +143,12 @@ public class QuestionController implements Serializable {
 
     public String update() {
         try {
+            for(Reponse rep:current.getReponses()){
+                reponseFacade.edit(rep);
+            }
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("QuestionQCMUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

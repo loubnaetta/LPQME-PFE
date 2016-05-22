@@ -39,7 +39,9 @@
         </p:column>  
        <p:column headerText="Série" >
            <center>
-               <h:outputText value="#{niveauController.serie_disponible(niveau)}" /> 
+               
+               <h:outputText value="#{niveauController.serie(niveau).size()}" /> 
+            
                <h:commandLink action="#{niveauController.prepareList_test(niveau,'serie')}"  title="Les Série" >
                      <h:graphicImage library="images" name="icons/black/32/cog_5.png" />
                  </h:commandLink> 
@@ -60,7 +62,7 @@
                      <h:graphicImage library="images" name="icons/color/pencil.png" />
                  </h:commandLink>
                  &nbsp; 
-              
+                
             <h:commandLink title="Supprimer"  actionListener="#{niveauController.destroy(niveau)}"    >
                       <p:graphicImage library="images" name="icons/color/cross.png" />
                  </h:commandLink> 

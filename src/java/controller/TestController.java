@@ -117,7 +117,8 @@ public class TestController implements Serializable {
     private void performDestroy() {
         try {
             current.setEtat(false);
-            getFacade().remove(current);
+            ejbFacade.edit(current);
+            //getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ExamenDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

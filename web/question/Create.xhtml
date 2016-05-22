@@ -24,7 +24,7 @@
                                     <div class="da-form-row">
                         <label>Question: <span class="required">*</span></label> 
                         <div class="da-form-item " style="padding-left: 10px;width: 800px">
-                            <h:inputTextarea style="height: 100px" value="#{questionController.selected.question}" class="required" requiredMessage="le nom de niveau est obligatoire" />
+                            <h:inputTextarea style="height: 100px" value="#{questionController.selected.question}" />
                         </div>
 
                     </div>
@@ -32,7 +32,7 @@
                     <div class="da-form-row">
                         <label>Indication: <span class="required" >*</span></label> 
                         <div class="da-form-item "  style="padding-left: 10px; width: 800px">
-                            <h:inputTextarea value="#{questionController.selected.remarque}"    requiredMessage="le nom de niveau est obligatoire"  />
+                            <h:inputTextarea value="#{questionController.selected.remarque}"     />
                             <br/> <label style="color: red">* L'indication sert à aider l'élève lorsqu'il n'arrive pas à avoir une bonne réponse</label>
 
                         </div>

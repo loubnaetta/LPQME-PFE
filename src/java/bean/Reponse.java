@@ -38,7 +38,13 @@ public class Reponse implements Serializable {
     public void setChoix(String choix) {
         this.choix = choix;
     }
-
+    
+   public String affiche_Etat(){
+       if(etat==true)
+           return "vrai";
+       else
+           return "faux";
+   } 
     public boolean isEtat() {
         return etat;
     }

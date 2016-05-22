@@ -29,13 +29,31 @@ public class PersonneController implements Serializable {
     private service.PersonneFacade ejbFacade;
 
     /*********/
+    public String prepareInscription(){
+        current=new Personne();
+        return "/inscription";
+    }
+    
     public String photo_profil(){
+       if(current.getRole()!=null){
         if(current.getRole().equals("professeur"))
             return "prof.png";
         else if(current.getRole().equals("eleve"))
             return "student.png";
-        else
+        else 
             return "admin.png";
+        }
+        else{
+            
+            return "icons/white/32/admin_user.png";
+        }
+            
+    }
+    public String info_profil(){
+         if(current.getRole()!=null)
+            return current.getPrenom().toUpperCase()+"    "+current.getNom().toUpperCase();
+            else
+            return "Nouvelle Inscription ";
     }
    
     String email="",pwd="";
@@ -129,7 +147,7 @@ public class PersonneController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PersonneCreated"));
-            return prepareCreate();
+            return "/index";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

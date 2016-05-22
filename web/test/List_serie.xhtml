@@ -15,14 +15,15 @@
             Série Disponible
         </ui:define>
         <ui:define name="body">
-              <div class="da-panel-content" style="width: 800px;">
+              <div class="da-panel-content" style="width: 1000px;padding-left: 150px;padding-right:  150px">
+                  <br/>
            <h:form styleClass="jsfcrud_list_form" >
                
                <p:dataTable var="test" value="#{niveauController.serie(niveauController.current)}" 
                     paginatorTemplate="{RowsPerPageDropdown}  {PreviousPageLink} {CurrentPageReport} {NextPageLink} " liveResize="true"
                     rowsPerPageTemplate="5,10,25"    id="data"  resizableColumns="true" emptyMessage="aucun résultat" rowKey="#{test.id}">
         
-         <p:column headerText="Nom de la Série" >
+         <p:column headerText="Nom de la Série" style="width: 300px">
             <center>
             <h:outputText value="#{test.nom}" />
             </center>
